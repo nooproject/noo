@@ -26,7 +26,7 @@ def clone_github(repo: str, dest: Path) -> None:
     temp_path.write_bytes(get(url).content)
 
     with ZipFile(temp_path) as zip_file:
-        print("eall", dest.absolute())
+        print("Cloned to ", dest.absolute())
         zip_file.extractall(dest.parent)
 
     move(dest.parent / f"{match.group('repo')}-{match.group('branch') or 'master'}", dest)
