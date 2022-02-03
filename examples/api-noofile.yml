@@ -1,0 +1,50 @@
+name: API Template
+remote: github:vcokltfre/api-template
+
+read:
+  - name: description
+    prompt: "Enter project description"
+  - name: repository
+    prompt: "Enter repository URL"
+  - name: author
+    prompt: "Enter author name"
+    default: vcokltfre
+  - name: email
+    prompt: "Enter email address"
+    default: vcokltfre@gmail.com
+
+steps:
+  - name: Update poetry
+    actions:
+      - action: replace
+        files:
+          - pyproject.toml
+        src: "\"api-template\""
+        dest: "\"$$noo:name\""
+      - action: replace
+        files:
+          - pyproject.toml
+        src: https://github.com/vcokltfre/api-template
+        dest: $$var:repository
+      - action: replace
+        files:
+          - pyproject.toml
+        src: A template API using FastAPI
+        dest: $$var:description
+      - action: replace
+        files:
+          - pyproject.toml
+        src: vcokltfre <vcokltfre@gmail.com>
+        dest: $$var:author <$$var:email>
+  - name: Update license
+    actions:
+      - action: replace
+        files:
+          - LICENSE
+        src: vcokltfre
+        dest: $$var:author
+      - action: replace
+        files:
+          - LICENSE
+        src: "2022"
+        dest: $$noo:year

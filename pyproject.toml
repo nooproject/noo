@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "noo"
+version = "1.0.0"
+description = "Easily create new projects."
+authors = ["vcokltfre <vcokltfre@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/vcokltfre/noo"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.27.1"
+typer = "^0.4.0"
+pydantic = "^1.9.0"
+PyYAML = "^6.0"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+noo = "noo:app"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
