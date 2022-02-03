@@ -4,7 +4,7 @@ from typer import echo
 
 from .format import replace
 from .noofile import Noofile, ReplaceAction
-from .resolvers import clone_local, clone_github
+from .resolvers import clone_github, clone_local
 from .variables import populate
 
 

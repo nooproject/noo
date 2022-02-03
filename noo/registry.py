@@ -1,5 +1,5 @@
+from json import dumps, loads
 from pathlib import Path
-from json import loads, dumps
 
 
 def save(name: str, ref: str) -> None:
@@ -12,9 +12,7 @@ def save(name: str, ref: str) -> None:
 
     if not registry.exists():
         registry.touch()
-        registry.write_text(dumps({
-            name: str(refl)
-        }))
+        registry.write_text(dumps({name: str(refl)}))
 
         return
 

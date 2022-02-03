@@ -1,8 +1,8 @@
 from pathlib import Path
 from re import compile
+from shutil import move
 from tempfile import gettempdir
 from zipfile import ZipFile
-from shutil import move
 
 from requests import get
 
@@ -29,4 +29,6 @@ def clone_github(repo: str, dest: Path) -> None:
         print("Cloned to ", dest.absolute())
         zip_file.extractall(dest.parent)
 
-    move(dest.parent / f"{match.group('repo')}-{match.group('branch') or 'master'}", dest)
+    move(
+        dest.parent / f"{match.group('repo')}-{match.group('branch') or 'master'}", dest
+    )
