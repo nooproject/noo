@@ -29,7 +29,5 @@ class NooCore:
         variables = get_variables(name)
         variables["var"].update(read_variables(spec.read))
 
-        echo(f"Cloned to {dest.absolute()}.")
-
         runner = Runner(dest, spec.steps, variables)
         runner.run()
