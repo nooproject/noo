@@ -1,5 +1,5 @@
 name: API Template
-remote: github:vcokltfre/api-template
+remote: git:vcokltfre/api-template
 
 read:
   - name: description
