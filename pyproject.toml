@@ -18,9 +18,20 @@ pydantic = "^1.9.0"
 PyYAML = "^6.0"
 
 [tool.poetry.dev-dependencies]
+taskipy = "^1.10.1"
+black = "^22.1.0"
+isort = "^5.10.1"
+pre-commit = "^2.17.0"
 
 [tool.poetry.scripts]
 noo = "noo:app"
+
+[tool.taskipy.tasks]
+lint = "black . && isort --profile black ."
+pre-commit = "pre-commit install"
+
+[tool.black]
+line-length = 120
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
