@@ -28,7 +28,7 @@ noo = "noo:app"
 
 [tool.taskipy.tasks]
 lint = "black . && isort --profile black ."
-pre-commit = "pre-commit install"
+pre-commit = "pre-commit install --hook-type commit-msg"
 
 [tool.black]
 line-length = 120
