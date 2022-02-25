@@ -19,15 +19,15 @@ reg = Registry(rpath)
 del rpath
 
 
-@app.command("register")
-def register(name: str, ref: str) -> None:
+@app.command("add")
+def add(name: str, ref: str) -> None:
     reg.set_item(name, ref)
 
     echo(f"Registered {name} as {ref}")
 
 
-@app.command("unregister")
-def unregister(name: str) -> None:
+@app.command("remove")
+def remove(name: str) -> None:
     try:
         reg.del_item(name)
     except KeyError:
