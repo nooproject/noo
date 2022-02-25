@@ -1,10 +1,8 @@
-from __future__ import annotations
-
 from typing import Optional
 
 from pydantic import BaseModel
 
-from .actions import ActionType
+from .actions import ActionType, List
 
 
 class ReadVariable(BaseModel):
@@ -15,11 +13,11 @@ class ReadVariable(BaseModel):
 
 class Step(BaseModel):
     name: str
-    actions: list[ActionType] = []
+    actions: List[ActionType] = []
 
 
 class Noofile(BaseModel):
     name: Optional[str] = None
     remote: str
-    read: list[ReadVariable] = []
-    steps: list[Step] = []
+    read: List[ReadVariable] = []
+    steps: List[Step] = []

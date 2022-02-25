@@ -1,6 +1,4 @@
-from __future__ import annotations
-
-from typing import Literal, Union
+from typing import Literal, Union, List
 
 from pydantic import BaseModel
 
@@ -11,7 +9,7 @@ class Action(BaseModel):
 
 class ReplaceAction(Action):
     action: Literal["replace"]
-    files: list[str]
+    files: List[str]
     src: str
     dest: str
 
