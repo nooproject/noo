@@ -14,6 +14,10 @@ or install from github
 pip install git+https://github.com/py-noo/noo
 ```
 
+## Contributing
+
+See [contributing](./.github/CONTRIBUTING.md).
+
 ## Usage
 
 ```sh
