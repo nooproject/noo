@@ -1,5 +1,6 @@
 from os import getenv
 from pathlib import Path
+from json import loads, dumps
 
 from typer import Typer, echo
 
@@ -39,9 +40,18 @@ def remove(name: str) -> None:
 
 @app.command("import")
 def import_(file: str) -> None:
-    echo(f"Importing registries is not yet implemented.")
+    data = loads(Path(file).read_text())
+
+    for key, value in data.items():
+        reg.set_item(key, str(Path(value).absolute()))
+
+    echo(f"Imported {len(data)} items")
 
 
 @app.command("export")
 def export(file: str = "export.json") -> None:
-    echo(f"Exporting registries is not yet implemented.")
+    data = reg.read()
+
+    Path(file).write_text(dumps(data, indent=2))
+
+    echo(f"Exported {len(data)} items")
