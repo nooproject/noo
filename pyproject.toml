@@ -1,11 +1,14 @@
 [tool.poetry]
-name = "noo"
+name = "pynoo"
 version = "1.0.0"
 description = "Easily create new projects."
 authors = ["vcokltfre <vcokltfre@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/vcokltfre/noo"
 readme = "README.md"
+packages = [
+    { include = "noo" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
