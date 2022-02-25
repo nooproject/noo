@@ -8,6 +8,16 @@ from ..models import CreateAction, DeleteAction, RenameAction, ReplaceAction, St
 from .formatter import replace, format_vars
 
 
+OPMAP = {
+    "eq": lambda a, b: str(a) == str(b),
+    "ne": lambda a, b: str(a) != str(b),
+    "gt": lambda a, b: int(a) > int(b),
+    "ge": lambda a, b: int(a) >= int(b),
+    "lt": lambda a, b: int(a) < int(b),
+    "le": lambda a, b: int(a) <= int(b),
+}
+
+
 class Runner:
     def __init__(
         self, base: Path, steps: list[Step], variables: dict[str, dict[str, str | int]]
@@ -15,6 +25,17 @@ class Runner:
         self.base = base
         self.steps = steps
         self.vars = variables
+
+    def _resolve_var(self, var: str) -> str | int:
+        ns, name = var.removeprefix("$$").split(":", 1)
+
+        if ns not in ("noo", "var"):
+            raise ValueError(f"Unknown namespace: {ns}")
+
+        if name not in self.vars[ns]:
+            raise ValueError(f"Unknown variable: {ns}:{name}")
+
+        return self.vars[ns][name]
 
     def _run_replace(self, files: list[str], src: str, dest: str) -> None:
         for file in files:
@@ -43,7 +64,26 @@ class Runner:
 
         path.rename(self.base / dest)
 
+    def _verify_step_conditions(self, step: Step) -> bool:
+        if step.conditions is None:
+            return True
+
+        for condition in step.conditions:
+            var = self._resolve_var(condition.var)
+            value = condition.value
+
+            op = OPMAP[condition.op]
+
+            if not op(var, value):
+                return False
+
+        return True
+
     def _run_step(self, step: Step) -> None:
+        if not self._verify_step_conditions(step):
+            echo(f"Skipping step {step.name}.")
+            return
+
         for action in step.actions:
             if isinstance(action, ReplaceAction):
                 self._run_replace(action.files, action.src, action.dest)

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Literal
 
 from pydantic import BaseModel
 
@@ -11,9 +11,16 @@ class ReadVariable(BaseModel):
     default: Optional[str] = None
 
 
+class Condition(BaseModel):
+    op: Literal["eq", "ne", "gt", "ge", "lt", "le"]
+    var: str
+    value: str
+
+
 class Step(BaseModel):
     name: str
     actions: List[ActionType] = []
+    conditions: Optional[List[Condition]] = None
 
 
 class Noofile(BaseModel):

@@ -61,12 +61,30 @@ A step defines a single step in the process of setting up a project.
 ```yml
 name: str
 actions: [Action]
+conditions: ?[Condition]
 ```
 
-| Field   | Type         | Description                     |
-|---------|--------------|---------------------------------|
-| name    | str          | The name of the setup step      |
-| actions | list[Action] | The list of actions in the step |
+| Field      | Type             | Description                                                 |
+|------------|------------------|-------------------------------------------------------------|
+| name       | str              | The name of the setup step                                  |
+| actions    | list[Action]     | The list of actions in the step                             |
+| conditions | ?list[Condition] | An optional list of conditions required for the step to run |
+
+### Condition
+
+A condition is a function that must be true for a step to run.
+
+```yml
+op: eq | ne | gt | lt | ge | le
+var: str
+value: str
+```
+
+| Field | Type       | Description                            |
+|-------|------------|----------------------------------------|
+| op    | Literal[eq | ne                                     |
+| var   | str        | The variable to compare, i.e. noo:year |
+| value | str        | The value to compare to                |
 
 ### Action
 
