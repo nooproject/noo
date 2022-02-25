@@ -5,8 +5,7 @@ from pathlib import Path
 from typer import echo
 
 from ..models import CreateAction, DeleteAction, RenameAction, ReplaceAction, Step
-from .formatter import replace, format_vars
-
+from .formatter import format_vars, replace
 
 OPMAP = {
     "eq": lambda a, b: str(a) == str(b),
@@ -19,9 +18,7 @@ OPMAP = {
 
 
 class Runner:
-    def __init__(
-        self, base: Path, steps: list[Step], variables: dict[str, dict[str, str | int]]
-    ) -> None:
+    def __init__(self, base: Path, steps: list[Step], variables: dict[str, dict[str, str | int]]) -> None:
         self.base = base
         self.steps = steps
         self.vars = variables

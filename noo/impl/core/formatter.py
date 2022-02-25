@@ -5,9 +5,7 @@ from re import compile
 VAR = compile(r"\$\$(?P<namespace>[a-zA-Z_]+):(?P<name>[a-zA-Z_]+)")
 
 
-def replace(
-    text: str, src: str, dest: str, variables: dict[str, dict[str, str | int]]
-) -> str:
+def replace(text: str, src: str, dest: str, variables: dict[str, dict[str, str | int]]) -> str:
     resolved_dest = dest
 
     for ns, var in VAR.findall(dest):
@@ -20,6 +18,7 @@ def replace(
         resolved_dest = resolved_dest.replace(f"$${ns}:{var}", str(variables[ns][var]))
 
     return text.replace(src, resolved_dest)
+
 
 def format_vars(text: str, variables: dict[str, dict[str, str | int]]) -> str:
     for ns, var in VAR.findall(text):

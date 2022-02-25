@@ -8,9 +8,7 @@ from zipfile import ZipFile
 
 from requests import get
 
-REPO = compile(
-    r"(?P<author>[a-zA-Z0-9_-]+)\/(?P<repo>[a-zA-Z0-9_-]+)(@(?P<branch>[a-zA-Z0-9_-]+))?"
-)
+REPO = compile(r"(?P<author>[a-zA-Z0-9_-]+)\/(?P<repo>[a-zA-Z0-9_-]+)(@(?P<branch>[a-zA-Z0-9_-]+))?")
 
 
 def clone_github(repo: str, dest: Path) -> None:
@@ -31,6 +29,4 @@ def clone_github(repo: str, dest: Path) -> None:
         print("Cloned to ", dest.absolute())
         zip_file.extractall(dest.parent)
 
-    move(
-        dest.parent / f"{match.group('repo')}-{match.group('branch') or 'master'}", dest
-    )
+    move(dest.parent / f"{match.group('repo')}-{match.group('branch') or 'master'}", dest)
