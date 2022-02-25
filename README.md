@@ -2,6 +2,8 @@
 
 Easily create new projects.
 
+![Lint](https://github.com/py-noo/noo/actions/workflows/black.yml/badge.svg)
+
 ## Installation
 
 ```sh
