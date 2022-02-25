@@ -1,4 +1,4 @@
-from typing import Literal, Union, List
+from typing import List, Literal, Optional, Union
 
 from pydantic import BaseModel
 
@@ -14,4 +14,21 @@ class ReplaceAction(Action):
     dest: str
 
 
-ActionType = Union[ReplaceAction, Action]
+class DeleteAction(Action):
+    action: Literal["delete"]
+    files: List[str]
+
+
+class CreateAction(Action):
+    action: Literal["create"]
+    file: str
+    content: Optional[str] = None
+
+
+class RenameAction(Action):
+    action: Literal["rename"]
+    file: str
+    dest: str
+
+
+ActionType = Union[ReplaceAction, DeleteAction, CreateAction, RenameAction, Action]

@@ -4,10 +4,10 @@ from pathlib import Path
 
 from typer import echo
 
+from ..resolvers import clone_github, clone_local
 from .resolver import Resolver
 from .runner import Runner
 from .variables import get_variables, read_variables
-from ..resolvers import clone_github, clone_local
 
 
 class NooCore:

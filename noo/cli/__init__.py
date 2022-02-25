@@ -3,9 +3,9 @@ from shutil import rmtree
 
 from typer import Typer, echo
 
+from ..impl.core import NooCore
 from .components import registry_app
 from .components.registry import reg
-from ..impl.core import NooCore
 
 app = Typer()
 

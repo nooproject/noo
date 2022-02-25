@@ -20,3 +20,15 @@ def replace(
         resolved_dest = resolved_dest.replace(f"$${ns}:{var}", str(variables[ns][var]))
 
     return text.replace(src, resolved_dest)
+
+def format_vars(text: str, variables: dict[str, dict[str, str | int]]) -> str:
+    for ns, var in VAR.findall(text):
+        if ns not in ("noo", "var"):
+            raise ValueError(f"Unknown namespace: {ns}")
+
+        if var not in variables[ns]:
+            raise ValueError(f"Unknown variable: {ns}:{var}")
+
+        text = text.replace(f"$${ns}:{var}", str(variables[ns][var]))
+
+    return text

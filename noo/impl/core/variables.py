@@ -32,9 +32,7 @@ def read_variables(variables: list[ReadVariable]) -> dict[str, str | int]:
         if variable.default is not None:
             extra = f" [{variable.default}]"
 
-        value = input(
-            (variable.prompt or f"Enter {variable.name}") + f"{extra}: "
-        )
+        value = input((variable.prompt or f"Enter {variable.name}") + f"{extra}: ")
 
         data[variable.name] = value if value else variable.default
 

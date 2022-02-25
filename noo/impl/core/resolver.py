@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from pathlib import Path
 from json import loads
+from pathlib import Path
 
 from requests import get
 from yaml import safe_load

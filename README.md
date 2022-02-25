@@ -69,6 +69,35 @@ A list of files can be provided, and each file will have the same transform appl
   dest: str
 ```
 
+#### Delete action
+
+Delete actions are used to delete files.
+
+```yml
+- action: delete
+  files: [str]
+```
+
+#### Create action
+
+Create actions are used to create files. The `file` field specifies the file to be created, and the `content` field specifics the content to be placed into the file. The `content` field is formatted with defined variables.
+
+```yml
+- action: create
+  file: str
+  content: ?str
+```
+
+#### Rename action
+
+Rename actions are used to rename files. The `file` field specifies the file to be renamed, and the `dest` field specifies the new name of the file. The `dest` field is formatted with defined variables.
+
+```yml
+- action: rename
+  file: str
+  dest: str
+```
+
 ### Variables
 
 Variables are defined in the `read` section of the noofile. All variables set in the `read` section will be available in the `steps` section.
