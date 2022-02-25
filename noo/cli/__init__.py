@@ -4,6 +4,7 @@ from shutil import rmtree
 from typer import Typer, echo
 
 from ..impl.core import NooCore
+from ..impl.packager import Packager
 from .components import registry_app
 from .components.registry import reg
 
@@ -35,3 +36,20 @@ def clone(name: str, ref: str, dest: str = ".") -> None:
     except Exception as e:
         echo(f"An error occurred while cloning: {e}")
         # rmtree(path)
+
+
+@app.command("autopackage")
+def autopackage(path: str = ".", dest: str = "./noofile.yml") -> None:
+    _path = Path(path)
+    _dest = Path(dest)
+
+    if _dest.exists():
+        echo(f"File {_dest} already exists.")
+        return
+
+    echo(f"Autopacking {_path} to {_dest}...")
+
+    packager = Packager(_path)
+    packager.package(_dest)
+
+    echo(f"Done!")
