@@ -2,6 +2,18 @@
 
 Easily create new projects.
 
+## Installation
+
+```sh
+pip install pynoo
+```
+
+or install from github
+
+```sh
+pip install git+https://github.com/py-noo/noo
+```
+
 ## Usage
 
 ```sh
