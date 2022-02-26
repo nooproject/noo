@@ -3,22 +3,22 @@ from pathlib import Path
 from tomli import loads
 
 from ...models import Noofile, ReadVariable, ReplaceAction, Step
-from ..reader import read
 
 
 class PythonPoetryRunner:
     def __init__(self, location: Path) -> None:
         self.location = location
 
-    def package(self) -> Noofile:
+    def package(self, remote: str) -> Noofile:
         pyproject = self.location / "pyproject.toml"
         pyproject_data = loads(pyproject.read_text())
 
-        name = pyproject_data["tool"]["poetry"]["name"]
-        author = pyproject_data["tool"]["poetry"]["authors"][0]
-        desc = pyproject_data["tool"]["poetry"]["description"]
-        repo = pyproject_data["tool"]["poetry"]["repository"]
-        remote = read("Remote slug: ")
+        poetry_data = pyproject_data["tool"]["poetry"]
+
+        name = poetry_data["name"]
+        author = poetry_data["authors"][0]
+        desc = poetry_data["description"]
+        repo = poetry_data["repository"]
 
         noofile = Noofile(
             name=name.title(),

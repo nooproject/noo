@@ -6,6 +6,7 @@ from typing import Type
 from typer import echo
 from yaml import safe_dump
 
+from .reader import read
 from .runners import AutoPackagerRunner, JavaScriptRunner, PythonPoetryRunner
 
 RUNNERS: list[Type[AutoPackagerRunner]] = [
@@ -30,6 +31,6 @@ class Packager:
         self.runner = runner
 
     def package(self, to: Path) -> None:
-        spec = self.runner.package()
+        spec = self.runner.package(read("Remote slug: "))
 
         to.write_text(safe_dump(spec.dict()))

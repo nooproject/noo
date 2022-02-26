@@ -8,7 +8,7 @@ class AutoPackagerRunner(Protocol):
     def __init__(self, location: Path) -> None:
         ...
 
-    def package(self) -> Noofile:
+    def package(self, remote: str) -> Noofile:
         ...
 
     @staticmethod
