@@ -6,9 +6,10 @@ from typing import Type
 from typer import echo
 from yaml import safe_dump
 
-from .runners import AutoPackagerRunner, PythonPoetryRunner
+from .runners import AutoPackagerRunner, JavaScriptRunner, PythonPoetryRunner
 
 RUNNERS: list[Type[AutoPackagerRunner]] = [
+    JavaScriptRunner,
     PythonPoetryRunner,
 ]
 
