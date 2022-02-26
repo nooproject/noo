@@ -87,15 +87,15 @@ class Runner:
 
         return True
 
-    def _run_command(self, command: str, fail: bool, cwd: str) -> None:
+    def _run_command(self, command: str, fail: bool, cwd: str | Path) -> None:
         if not self.shell:
             echo(
                 f"Skipping command as shell is disabled. If you wish to run this command please use --shell.\n  Command: {command}"
             )
             return
 
-        _cwd = Path(cwd)
-        proc = Popen(command, cwd=_cwd, stdout=PIPE, stderr=PIPE, shell=True)
+        _cwd = Path(format_vars(cwd, self.vars) if isinstance(cwd, str) else cwd)
+        proc = Popen(format_vars(command, self.vars), cwd=_cwd, stdout=PIPE, stderr=PIPE, shell=True)
 
         out, err = proc.communicate()
 
@@ -119,7 +119,7 @@ class Runner:
             elif isinstance(action, RenameAction):
                 self._run_rename(action.file, action.dest)
             elif isinstance(action, CommandAction):
-                self._run_command(action.command, action.fail, action.cwd)
+                self._run_command(action.command, action.fail, action.cwd or self.base)
             else:
                 raise ValueError(f"Invalid action: {action}")
 

@@ -48,3 +48,8 @@ steps:
           - LICENSE
         src: "2022"
         dest: $$noo:year
+  - name: "Install"
+    actions:
+      - action: command
+        command: poetry install
+        cwd: ./$$noo:name

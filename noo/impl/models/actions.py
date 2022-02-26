@@ -35,7 +35,7 @@ class CommandAction(Action):
     action: Literal["command"]
     command: str
     fail: bool = True
-    cwd: str = "."
+    cwd: Optional[str] = None
 
 
 ActionType = Union[ReplaceAction, DeleteAction, CreateAction, RenameAction, CommandAction, Action]
