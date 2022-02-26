@@ -57,7 +57,7 @@ def mod(ref: str, dest: str = ".") -> None:
     core = NooCore()
     core.mod(str(abs_ref), path)
 
-    echo(f"Done!\n  cd {path}")
+    echo(f"Done!")
 
 
 @app.command("autopackage")
