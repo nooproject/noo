@@ -1,9 +1,10 @@
 from pathlib import Path
-from typing import Optional, List
+from typing import List, Optional
 
 from typer import Typer, echo
 
 app = Typer()
+
 
 @app.command("generate")
 def generate(directory: str = ".", suffix: str = ".noofile.yml", remote: Optional[str] = None) -> None:
@@ -43,9 +44,7 @@ def generate(directory: str = ".", suffix: str = ".noofile.yml", remote: Optiona
         name = file.name.split(".")[0]
 
         if remote:
-            commands.append(
-                f"noo reg add {name} https://raw.githubusercontent.com/{remote}/{branch}/{str(file)}"
-            )
+            commands.append(f"noo reg add {name} https://raw.githubusercontent.com/{remote}/{branch}/{str(file)}")
         else:
             commands.append(f"noo reg add {name} {str(file)}")
 

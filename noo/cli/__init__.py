@@ -5,7 +5,7 @@ from typer import Typer, echo
 
 from ..impl.core import NooCore
 from ..impl.packager import Packager
-from .components import registry_app, collection_app
+from .components import collection_app, registry_app
 from .components.registry import reg
 
 app = Typer()
