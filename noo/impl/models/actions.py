@@ -31,4 +31,11 @@ class RenameAction(Action):
     dest: str
 
 
-ActionType = Union[ReplaceAction, DeleteAction, CreateAction, RenameAction, Action]
+class CommandAction(Action):
+    action: Literal["command"]
+    command: str
+    fail: bool = True
+    cwd: str = "."
+
+
+ActionType = Union[ReplaceAction, DeleteAction, CreateAction, RenameAction, CommandAction, Action]

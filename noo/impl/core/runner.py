@@ -1,10 +1,18 @@
 from __future__ import annotations
 
 from pathlib import Path
+from subprocess import PIPE, Popen
 
 from typer import echo
 
-from ..models import CreateAction, DeleteAction, RenameAction, ReplaceAction, Step
+from ..models import (
+    CommandAction,
+    CreateAction,
+    DeleteAction,
+    RenameAction,
+    ReplaceAction,
+    Step,
+)
 from .formatter import format_vars, replace
 
 OPMAP = {
@@ -18,10 +26,13 @@ OPMAP = {
 
 
 class Runner:
-    def __init__(self, base: Path, steps: list[Step], variables: dict[str, dict[str, str | int]]) -> None:
+    def __init__(
+        self, base: Path, steps: list[Step], variables: dict[str, dict[str, str | int]], allow_shell: bool = False
+    ) -> None:
         self.base = base
         self.steps = steps
         self.vars = variables
+        self.shell = allow_shell
 
     def _resolve_var(self, var: str) -> str | int:
         ns, name = var.removeprefix("$$").split(":", 1)
@@ -76,6 +87,23 @@ class Runner:
 
         return True
 
+    def _run_command(self, command: str, fail: bool, cwd: str) -> None:
+        if not self.shell:
+            echo(
+                f"Skipping command as shell is disabled. If you wish to run this command please use --shell.\n  Command: {command}"
+            )
+            return
+
+        _cwd = Path(cwd)
+        proc = Popen(command, cwd=_cwd, stdout=PIPE, stderr=PIPE, shell=True)
+
+        out, err = proc.communicate()
+
+        if fail and proc.returncode:
+            raise RuntimeError(f"Command failed: {command}\n{err.decode()}")
+
+        echo(out.decode())
+
     def _run_step(self, step: Step) -> None:
         if not self._verify_step_conditions(step):
             echo(f"Skipping step {step.name}.")
@@ -90,6 +118,8 @@ class Runner:
                 self._run_create(action.file, action.content or "")
             elif isinstance(action, RenameAction):
                 self._run_rename(action.file, action.dest)
+            elif isinstance(action, CommandAction):
+                self._run_command(action.command, action.fail, action.cwd)
             else:
                 raise ValueError(f"Invalid action: {action}")
 

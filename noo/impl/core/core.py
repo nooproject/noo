@@ -11,8 +11,9 @@ from .variables import get_variables, read_variables
 
 
 class NooCore:
-    def __init__(self) -> None:
+    def __init__(self, allow_shell: bool = False) -> None:
         self.resolver = Resolver()
+        self.shell = allow_shell
 
     def clone(self, name: str, noofile: str, dest: Path) -> None:
         spec = self.resolver.resolve(noofile)
@@ -33,7 +34,7 @@ class NooCore:
         variables = get_variables(name)
         variables["var"].update(read_variables(spec.read))
 
-        runner = Runner(dest, spec.steps, variables)
+        runner = Runner(dest, spec.steps, variables, self.shell)
         runner.run()
 
     def mod(self, noofile: str, dest: Path) -> None:
@@ -44,5 +45,5 @@ class NooCore:
         variables = get_variables()
         variables["var"].update(read_variables(spec.read))
 
-        runner = Runner(dest, spec.steps, variables)
+        runner = Runner(dest, spec.steps, variables, self.shell)
         runner.run()

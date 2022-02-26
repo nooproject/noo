@@ -15,7 +15,7 @@ app.add_typer(collection_app, name="collection")
 
 
 @app.command("clone")
-def clone(name: str, ref: str, dest: str = ".") -> None:
+def clone(name: str, ref: str, dest: str = ".", shell: bool = False) -> None:
     path = Path(dest) / name
 
     if path.exists():
@@ -30,7 +30,7 @@ def clone(name: str, ref: str, dest: str = ".") -> None:
     echo(f"Cloning project {abs_ref} to {path}...")
 
     try:
-        core = NooCore()
+        core = NooCore(shell)
         core.clone(name, str(abs_ref), path)
 
         echo(f"Done!\n  cd {path}")
@@ -40,7 +40,7 @@ def clone(name: str, ref: str, dest: str = ".") -> None:
 
 
 @app.command("mod")
-def mod(ref: str, dest: str = ".") -> None:
+def mod(ref: str, dest: str = ".", shell: bool = False) -> None:
     path = Path(dest)
 
     if not path.exists():
@@ -54,7 +54,7 @@ def mod(ref: str, dest: str = ".") -> None:
 
     echo(f"Modifying project with {abs_ref}...")
 
-    core = NooCore()
+    core = NooCore(shell)
     core.mod(str(abs_ref), path)
 
     echo(f"Done!")
