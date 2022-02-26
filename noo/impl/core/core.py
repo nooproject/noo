@@ -19,6 +19,10 @@ class NooCore:
 
         echo(f"Starting clone process for {spec.name or name}.")
 
+        if not spec.remote:
+            echo(f"No remote specified for {spec.name or name}")
+            return
+
         if spec.remote.startswith("git:"):
             clone_github(spec.remote[4:], dest)
         elif spec.remote.startswith("file:"):
@@ -27,6 +31,17 @@ class NooCore:
             raise ValueError(f"Invalid remote: {spec.remote}")
 
         variables = get_variables(name)
+        variables["var"].update(read_variables(spec.read))
+
+        runner = Runner(dest, spec.steps, variables)
+        runner.run()
+
+    def mod(self, noofile: str, dest: Path) -> None:
+        spec = self.resolver.resolve(noofile)
+
+        echo(f"Starting modification for {spec.name or 'unnamed'}.")
+
+        variables = get_variables()
         variables["var"].update(read_variables(spec.read))
 
         runner = Runner(dest, spec.steps, variables)

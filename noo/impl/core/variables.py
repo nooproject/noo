@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from datetime import datetime
+from typing import Optional
 
 from ..models import ReadVariable
 
 
-def get_variables(name: str) -> dict[str, dict[str, str | int]]:
+def get_variables(name: Optional[str] = None) -> dict[str, dict[str, str | int]]:
     data = {}
 
     now = datetime.now()
@@ -18,8 +19,10 @@ def get_variables(name: str) -> dict[str, dict[str, str | int]]:
         "hour": now.hour,
         "minute": now.minute,
         "second": now.second,
-        "name": name,
     }
+
+    if name:
+        data["noo"]["name"] = name  # type: ignore
 
     return data
 

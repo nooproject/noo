@@ -39,6 +39,27 @@ def clone(name: str, ref: str, dest: str = ".") -> None:
         rmtree(path)
 
 
+@app.command("mod")
+def mod(ref: str, dest: str = ".") -> None:
+    path = Path(dest)
+
+    if not path.exists():
+        echo(f"Path {path} does not exist.")
+        return
+
+    try:
+        abs_ref = reg.get_item(ref)
+    except KeyError:
+        abs_ref = ref
+
+    echo(f"Modifying project with {abs_ref}...")
+
+    core = NooCore()
+    core.mod(str(abs_ref), path)
+
+    echo(f"Done!\n  cd {path}")
+
+
 @app.command("autopackage")
 def autopackage(path: str = ".", dest: str = "./noofile.yml") -> None:
     _path = Path(path)

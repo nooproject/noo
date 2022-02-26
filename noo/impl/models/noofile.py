@@ -25,6 +25,6 @@ class Step(BaseModel):
 
 class Noofile(BaseModel):
     name: Optional[str] = None
-    remote: str
+    remote: Optional[str] = None
     read: List[ReadVariable] = []
     steps: List[Step] = []
