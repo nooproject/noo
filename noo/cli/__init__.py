@@ -35,7 +35,7 @@ def clone(name: str, ref: str, dest: str = ".") -> None:
         echo(f"Done!\n  cd {path}")
     except Exception as e:
         echo(f"An error occurred while cloning: {e}")
-        # rmtree(path)
+        rmtree(path)
 
 
 @app.command("autopackage")
