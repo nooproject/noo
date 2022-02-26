@@ -35,12 +35,12 @@ read: [Read]
 steps: [Step]
 ```
 
-| Field  | Type       | Description                            |
-|--------|------------|----------------------------------------|
-| name   | str        | The name of the noofile definition     |
-| remote | str        | The remote location of the template    |
-| read   | list[Read] | The list of variables to read on setup |
-| steps  | list[Step] | The list of steps to run               |
+| Field  | Type                | Description                            |
+|--------|---------------------|----------------------------------------|
+| name   | str                 | The name of the noofile definition     |
+| remote | str                 | The remote location of the template    |
+| read   | list[[Read](#read)] | The list of variables to read on setup |
+| steps  | list[[Step](#step)] | The list of steps to run               |
 
 ### Read
 
@@ -66,11 +66,11 @@ actions: [Action]
 conditions: ?[Condition]
 ```
 
-| Field      | Type             | Description                                                 |
-|------------|------------------|-------------------------------------------------------------|
-| name       | str              | The name of the setup step                                  |
-| actions    | list[Action]     | The list of actions in the step                             |
-| conditions | ?list[Condition] | An optional list of conditions required for the step to run |
+| Field      | Type                           | Description                                                 |
+|------------|--------------------------------|-------------------------------------------------------------|
+| name       | str                            | The name of the setup step                                  |
+| actions    | list[[Action](#action)]        | The list of actions in the step                             |
+| conditions | ?list[[Condition](#condition)] | An optional list of conditions required for the step to run |
 
 ### Condition
 
@@ -82,11 +82,24 @@ var: str
 value: str
 ```
 
-| Field | Type       | Description                            |
-|-------|------------|----------------------------------------|
-| op    | Literal[eq | ne                                     |
-| var   | str        | The variable to compare, i.e. noo:year |
-| value | str        | The value to compare to                |
+| Field | Type                       | Description                            |
+|-------|----------------------------|----------------------------------------|
+| op    | Literal[[OpType](#optype)] | The operation to perform               |
+| var   | str                        | The variable to compare, i.e. noo:year |
+| value | str                        | The value to compare to                |
+
+### OpType
+
+List of operation types:
+
+| Name | Operation              |
+|------|------------------------|
+| eq   | Equals                 |
+| ne   | Not Equals             |
+| gt   | Greater Than           |
+| lt   | Less Than              |
+| ge   | Greater Than or Equals |
+| le   | Less Than or Equals    |
 
 ### Action
 
