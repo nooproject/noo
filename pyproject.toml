@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pynoo"
-version = "1.3.1"
+version = "1.3.2"
 description = "Easily create new projects."
 authors = ["vcokltfre <vcokltfre@gmail.com>"]
 license = "MIT"
@@ -16,6 +16,7 @@ requests = "^2.27.1"
 typer = "^0.4.0"
 pydantic = "^1.9.0"
 PyYAML = "^6.0"
+tomli = "^1.2.3"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.10.1"
