@@ -22,7 +22,7 @@ del rpath
 
 @app.command("add")
 def add(name: str, ref: str) -> None:
-    reg.set_item(name, ref)
+    reg.set_item(name, Path(ref))
 
     echo(f"Registered {name} as {ref}")
 
