@@ -34,7 +34,7 @@ class NooCore:
         variables = get_variables(name)
         variables["var"].update(read_variables(spec.read))
 
-        runner = Runner(dest, spec.steps, variables, self.shell)
+        runner = Runner(self, dest, spec.steps, variables, self.shell)
         runner.run()
 
     def mod(self, noofile: str, dest: Path) -> None:
@@ -45,5 +45,5 @@ class NooCore:
         variables = get_variables()
         variables["var"].update(read_variables(spec.read))
 
-        runner = Runner(dest, spec.steps, variables, self.shell)
+        runner = Runner(self, dest, spec.steps, variables, self.shell)
         runner.run()

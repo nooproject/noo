@@ -38,4 +38,9 @@ class CommandAction(Action):
     cwd: Optional[str] = None
 
 
-ActionType = Union[ReplaceAction, DeleteAction, CreateAction, RenameAction, CommandAction, Action]
+class RemoteAction(Action):
+    action: Literal["remote"]
+    remote: str
+
+
+ActionType = Union[ReplaceAction, DeleteAction, CreateAction, RenameAction, CommandAction, RemoteAction, Action]

@@ -2,6 +2,7 @@ from .actions import (
     CommandAction,
     CreateAction,
     DeleteAction,
+    RemoteAction,
     RenameAction,
     ReplaceAction,
 )
@@ -13,6 +14,7 @@ __all__ = (
     "DeleteAction",
     "Noofile",
     "ReadVariable",
+    "RemoteAction",
     "RenameAction",
     "ReplaceAction",
     "Step",

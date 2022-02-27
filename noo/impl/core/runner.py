@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from subprocess import PIPE, Popen
+from typing import TYPE_CHECKING
 
 from typer import echo
 
@@ -9,11 +10,15 @@ from ..models import (
     CommandAction,
     CreateAction,
     DeleteAction,
+    RemoteAction,
     RenameAction,
     ReplaceAction,
     Step,
 )
 from .formatter import format_vars, replace
+
+if TYPE_CHECKING:
+    from .core import NooCore
 
 OPMAP = {
     "eq": lambda a, b: str(a) == str(b),
@@ -27,8 +32,14 @@ OPMAP = {
 
 class Runner:
     def __init__(
-        self, base: Path, steps: list[Step], variables: dict[str, dict[str, str | int]], allow_shell: bool = False
+        self,
+        core: NooCore,
+        base: Path,
+        steps: list[Step],
+        variables: dict[str, dict[str, str | int]],
+        allow_shell: bool = False,
     ) -> None:
+        self.core = core
         self.base = base
         self.steps = steps
         self.vars = variables
@@ -120,6 +131,8 @@ class Runner:
                 self._run_rename(action.file, action.dest)
             elif isinstance(action, CommandAction):
                 self._run_command(action.command, action.fail, action.cwd or self.base)
+            elif isinstance(action, RemoteAction):
+                self.core.mod(action.remote, self.base)
             else:
                 raise ValueError(f"Invalid action: {action}")
 
