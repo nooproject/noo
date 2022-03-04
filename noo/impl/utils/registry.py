@@ -53,3 +53,5 @@ class Registry:
 
     def del_item(self, key: str) -> None:
         del self.value[key]
+
+        self.write()

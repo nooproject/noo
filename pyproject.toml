@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pynoo"
-version = "1.4.2"
+version = "1.4.3"
 description = "Easily create new projects."
 authors = ["vcokltfre <vcokltfre@gmail.com>"]
 license = "MIT"
