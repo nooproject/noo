@@ -22,7 +22,10 @@ del rpath
 
 @app.command("add")
 def add(name: str, ref: str) -> None:
-    reg.set_item(name, Path(ref))
+    if ref.startswith("http://") or ref.startswith("https://"):
+        reg.set_item(name, ref)
+    else:
+        reg.set_item(name, Path(ref))
 
     echo(f"Registered {name} as {ref}")
 
