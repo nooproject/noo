@@ -5,13 +5,14 @@ from typer import Typer, echo
 
 from ..impl.core import NooCore
 from ..impl.packager import Packager
-from .components import collection_app, registry_app
+from .components import collection_app, config_app, registry_app
 from .components.registry import reg
 
 app = Typer()
 
 app.add_typer(registry_app, name="reg")
 app.add_typer(collection_app, name="collection")
+app.add_typer(config_app, name="conf")
 
 
 @app.command("clone")

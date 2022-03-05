@@ -30,7 +30,7 @@ class Store:
     def _write(self) -> None:
         self._file.write_text(dumps(self._data, indent=2))
 
-    def get(self, key: str) -> Any | None:
+    def get(self, key: str, default: Any | None = None) -> Any | None:
         return self._data.get(key)
 
     def set(self, key: str, value: Any) -> None:

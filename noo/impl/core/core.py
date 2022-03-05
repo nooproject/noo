@@ -6,7 +6,7 @@ from typer import echo
 
 from ..models import Noofile
 from ..resolvers import clone_github, clone_local
-from ..utils import Registry
+from ..utils import STORE, Registry
 from .runner import Runner
 from .variables import get_variables, read_variables
 
@@ -14,7 +14,7 @@ from .variables import get_variables, read_variables
 class NooCore:
     def __init__(self, registry: Registry, allow_shell: bool = False) -> None:
         self.registry = registry
-        self.shell = allow_shell
+        self.shell = STORE.get("shell", "deny") == "allow" or allow_shell
 
     def clone(self, name: str, spec: Noofile, dest: Path) -> None:
         echo(f"Starting clone process for {spec.name or name}.")
