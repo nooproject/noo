@@ -4,7 +4,7 @@ from pathlib import Path
 
 from typer import echo
 
-from ..models import Noofile
+from ..models import BaseNoofile, Noofile
 from ..resolvers import clone_github, clone_local
 from ..utils import STORE, Registry
 from .runner import Runner
@@ -17,10 +17,10 @@ class NooCore:
         self.shell = STORE.get("shell", "deny") == "allow" or allow_shell
 
     def clone(self, name: str, spec: Noofile, dest: Path) -> None:
-        echo(f"Starting clone process for {spec.name or name}.")
+        echo(f"Starting clone process for {spec.name}.")
 
         if not spec.remote:
-            echo(f"No remote specified for {spec.name or name}")
+            echo(f"No remote specified for {spec.name}")
             return
 
         if spec.remote.startswith("git:"):
@@ -38,7 +38,7 @@ class NooCore:
 
     def mod(
         self,
-        noofile: str | Noofile,
+        noofile: str | BaseNoofile,
         dest: Path,
         default_variables: dict[str, dict[str, str | int]] | None = None,
         in_action: bool = False,

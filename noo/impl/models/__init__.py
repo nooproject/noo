@@ -6,9 +6,10 @@ from .actions import (
     RenameAction,
     ReplaceAction,
 )
-from .noofile import Noofile, ReadVariable, Step
+from .noofile import BaseNoofile, Noofile, ReadVariable, Step
 
 __all__ = (
+    "BaseNoofile",
     "CreateAction",
     "CommandAction",
     "DeleteAction",

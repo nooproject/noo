@@ -23,6 +23,7 @@ class PythonPoetryRunner:
         noofile = Noofile(
             name=name.title(),
             remote=remote,
+            noo_version=2,
         )
 
         poetry_step = Step(name="Update Poetry")

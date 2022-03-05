@@ -23,8 +23,12 @@ class Step(BaseModel):
     conditions: Optional[List[Condition]] = None
 
 
-class Noofile(BaseModel):
-    name: Optional[str] = None
-    remote: Optional[str] = None
+class BaseNoofile(BaseModel):
+    noo_version: int
+    name: str
     read: List[ReadVariable] = []
     steps: List[Step] = []
+
+
+class Noofile(BaseNoofile):
+    remote: str

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from json import loads
 from pathlib import Path
 
 from requests import get
+from typer import echo
 from yaml import safe_load
 
 from ..models import Noofile
@@ -19,7 +19,13 @@ class Resolver:
         if not path.exists():
             raise ValueError(f"No such file: {path}")
 
-        return Noofile(**safe_load(path.read_text()))
+        data = safe_load(path.read_text())
+
+        if (ver := data.get("noo_version", 1)) != 2:
+            echo(f"Specified noofile cannot be run by this Noo version (local: 2, noofile: {ver})")
+            exit(1)
+
+        return Noofile(**data)
 
     def resolve_http(self, path: str) -> Noofile:
         data = get(path)

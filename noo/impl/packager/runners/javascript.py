@@ -19,6 +19,7 @@ class JavaScriptRunner:
         noofile = Noofile(
             name=name.title(),
             remote=remote,
+            noo_version=2,
         )
 
         package_json_step = Step(name="Update package.json")
