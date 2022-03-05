@@ -13,7 +13,7 @@ class Resolver:
     def __init__(self) -> None:
         pass
 
-    def _resolve_local(self, file: str) -> Noofile:
+    def resolve_local(self, file: str) -> Noofile:
         path = Path(file)
 
         if not path.exists():
@@ -21,7 +21,7 @@ class Resolver:
 
         return Noofile(**safe_load(path.read_text()))
 
-    def _resolve_http(self, path: str) -> Noofile:
+    def resolve_http(self, path: str) -> Noofile:
         data = get(path)
 
         if data.status_code != 200:
@@ -29,8 +29,8 @@ class Resolver:
 
         return Noofile(**safe_load(data.content))
 
-    def resolve(self, loc: str) -> Noofile:
+    def resolve_auto(self, loc: str) -> Noofile:
         if loc.startswith("http"):
-            return self._resolve_http(loc)
+            return self.resolve_http(loc)
 
-        return self._resolve_local(loc)
+        return self.resolve_local(loc)

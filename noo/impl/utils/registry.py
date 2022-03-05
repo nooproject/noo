@@ -1,57 +1,68 @@
 from __future__ import annotations
 
-from json import dumps, loads
+from json import loads
 from pathlib import Path
-from typing import Optional
+
+from ..models import Noofile
+from .resolver import Resolver
+from .store import STORE
 
 
 class Registry:
-    def __init__(self, path: Optional[Path] = None) -> None:
-        self.path = path or Path.home() / ".config" / "noo"
-        self.path.mkdir(parents=True, exist_ok=True)
+    def __init__(self) -> None:
+        self._data: dict = STORE.get("registry") or {}
+        self._resolver = Resolver()
 
-        self.value = self.read(cache=False)
+    def _write(self) -> None:
+        STORE["registry"] = self._data
 
-    def read(self, cache: bool = True) -> dict[str, str]:
-        path = self.path / "registry.json"
+    def _add_local(self, name: str, path: Path) -> None:
+        self._data[name] = {
+            "type": "local",
+            "ref": str(path.absolute()),
+        }
 
-        if not path.exists():
-            return {}
+        self._write()
 
-        data = loads(path.read_text())
+    def _add_remote(self, name: str, ref: str) -> None:
+        self._data[name] = {
+            "type": "remote",
+            "ref": ref,
+        }
 
-        if cache:
-            self.value = data
+        self._write()
 
-        return data
+    def _resolve(self, ref: str, remote: bool) -> Noofile:
+        if remote:
+            return self._resolver.resolve_http(ref)
+        return self._resolver.resolve_local(ref)
 
-    def write(self) -> None:
-        path = self.path / "registry.json"
-
-        if not path.exists():
-            path.touch()
-
-        path.write_text(dumps(self.value, indent=2))
-
-    def set_item(self, key: str, ref: str | Path) -> None:
-        if isinstance(ref, Path):
-            absolute_ref = "file:" + str(ref.absolute())
+    def add(self, name: str, ref: str) -> None:
+        if ref.startswith(("http://", "https://")):
+            self._add_remote(name, ref)
         else:
-            absolute_ref = ref
+            self._add_local(name, Path(ref))
 
-        self.value[key] = absolute_ref
+    def get(self, name: str) -> Noofile:
+        if item := self._data.get(name):
+            return self._resolve(item["ref"], item["type"] == "remote")
 
-        self.write()
+        for registry in STORE.get("registries") or []:
+            if item := registry.get(name):
+                return self._resolve(item["ref"], item["type"] == "remote")
 
-    def get_item(self, key: str) -> str | Path:
-        ref = self.value[key]
+        if name.startswith(("http://", "https://")):
+            return self._resolve(name, True)
 
-        if ref.startswith("file:"):
-            return Path(ref[5:])
+        try:
+            return self._resolve(name, False)
+        except ValueError:
+            raise ValueError(f"No such noofile: {name}")
 
-        return ref
+    def remove(self, name: str) -> None:
+        del self._data[name]
 
-    def del_item(self, key: str) -> None:
-        del self.value[key]
+        self._write()
 
-        self.write()
+    def all(self) -> dict[str, dict[str, str]]:
+        return self._data

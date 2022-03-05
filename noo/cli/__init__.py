@@ -22,16 +22,13 @@ def clone(name: str, ref: str, dest: str = ".", shell: bool = False) -> None:
         echo(f"Path {path} already exists.")
         return
 
-    try:
-        abs_ref = reg.get_item(ref)
-    except KeyError:
-        abs_ref = ref
+    noofile = reg.get(ref)
 
-    echo(f"Cloning project {abs_ref} to {path}...")
+    echo(f"Cloning project {noofile.name} to {path}...")
 
     try:
-        core = NooCore(shell)
-        core.clone(name, str(abs_ref), path)
+        core = NooCore(reg, shell)
+        core.clone(name, noofile, path)
 
         echo(f"Done!\n  cd {path}")
     except Exception as e:
@@ -47,15 +44,12 @@ def mod(ref: str, dest: str = ".", shell: bool = False) -> None:
         echo(f"Path {path} does not exist.")
         return
 
-    try:
-        abs_ref = reg.get_item(ref)
-    except KeyError:
-        abs_ref = ref
+    noofile = reg.get(ref)
 
-    echo(f"Modifying project with {abs_ref}...")
+    echo(f"Modifying project with {ref}...")
 
-    core = NooCore(shell)
-    core.mod(str(abs_ref), path)
+    core = NooCore(reg, shell)
+    core.mod(noofile, path)
 
     echo(f"Done!")
 

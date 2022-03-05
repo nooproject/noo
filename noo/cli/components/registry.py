@@ -8,24 +8,12 @@ from ...impl.utils import Registry
 
 app = Typer()
 
-
-rpath = None
-if _path := getenv("NOO_REGISTRY_PATH"):
-    rpath = Path(_path)
-
-del _path
-
-reg = Registry(rpath)
-
-del rpath
+reg = Registry()
 
 
 @app.command("add")
 def add(name: str, ref: str) -> None:
-    if ref.startswith("http://") or ref.startswith("https://"):
-        reg.set_item(name, ref)
-    else:
-        reg.set_item(name, Path(ref))
+    reg.add(name, ref)
 
     echo(f"Registered {name} as {ref}")
 
@@ -33,7 +21,7 @@ def add(name: str, ref: str) -> None:
 @app.command("remove")
 def remove(name: str) -> None:
     try:
-        reg.del_item(name)
+        reg.remove(name)
     except KeyError:
         echo(f"No such key: {name}")
         return
@@ -46,14 +34,14 @@ def import_(file: str) -> None:
     data = loads(Path(file).read_text())
 
     for key, value in data.items():
-        reg.set_item(key, str(Path(value).absolute()))
+        reg.add(key, value["ref"])
 
     echo(f"Imported {len(data)} items")
 
 
 @app.command("export")
 def export(file: str = "export.json") -> None:
-    data = reg.read()
+    data = reg.all()
 
     Path(file).write_text(dumps(data, indent=2))
 
