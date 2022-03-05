@@ -1,3 +1,4 @@
+from __future__ import annotations
 from pathlib import Path
 from shutil import rmtree
 
@@ -5,6 +6,7 @@ from typer import Typer, echo
 
 from ..impl.core import NooCore
 from ..impl.packager import Packager
+from ..impl.utils.config import Config
 from .components import collection_app, registry_app
 from .components.registry import reg
 
@@ -13,9 +15,14 @@ app = Typer()
 app.add_typer(registry_app, name="reg")
 app.add_typer(collection_app, name="collection")
 
+config = Config()
+
 
 @app.command("clone")
-def clone(name: str, ref: str, dest: str = ".", shell: bool = False) -> None:
+def clone(name: str, ref: str, dest: str = ".", shell: bool | None = None) -> None:
+    if shell is None:
+        shell = config.get("shell") or False
+        assert shell is not None
     path = Path(dest) / name
 
     if path.exists():
@@ -23,7 +30,7 @@ def clone(name: str, ref: str, dest: str = ".", shell: bool = False) -> None:
         return
 
     try:
-        abs_ref = reg.get_item(ref)
+        abs_ref = reg[ref]
     except KeyError:
         abs_ref = ref
 
@@ -48,7 +55,7 @@ def mod(ref: str, dest: str = ".", shell: bool = False) -> None:
         return
 
     try:
-        abs_ref = reg.get_item(ref)
+        abs_ref = reg[ref]
     except KeyError:
         abs_ref = ref
 

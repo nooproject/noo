@@ -9,23 +9,15 @@ from ...impl.utils import Registry
 app = Typer()
 
 
-rpath = None
-if _path := getenv("NOO_REGISTRY_PATH"):
-    rpath = Path(_path)
-
-del _path
-
-reg = Registry(rpath)
-
-del rpath
+reg = Registry()
 
 
 @app.command("add")
 def add(name: str, ref: str) -> None:
     if ref.startswith("http://") or ref.startswith("https://"):
-        reg.set_item(name, ref)
+        reg[name] = ref
     else:
-        reg.set_item(name, Path(ref))
+        reg[name] = Path(ref)
 
     echo(f"Registered {name} as {ref}")
 
@@ -33,7 +25,7 @@ def add(name: str, ref: str) -> None:
 @app.command("remove")
 def remove(name: str) -> None:
     try:
-        reg.del_item(name)
+        del reg[name]
     except KeyError:
         echo(f"No such key: {name}")
         return
@@ -46,7 +38,7 @@ def import_(file: str) -> None:
     data = loads(Path(file).read_text())
 
     for key, value in data.items():
-        reg.set_item(key, str(Path(value).absolute()))
+        reg[key] = str(Path(value).absolute())
 
     echo(f"Imported {len(data)} items")
 
