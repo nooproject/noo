@@ -1,5 +1,4 @@
 from json import dumps, loads
-from os import getenv
 from pathlib import Path
 
 from typer import Typer, echo
