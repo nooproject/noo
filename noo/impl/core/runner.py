@@ -132,7 +132,7 @@ class Runner:
             elif isinstance(action, CommandAction):
                 self._run_command(action.command, action.fail, action.cwd or self.base)
             elif isinstance(action, RemoteAction):
-                self.core.mod(action.remote, self.base)
+                self.core.mod(action.remote, self.base, self.vars)
             else:
                 raise ValueError(f"Invalid action: {action}")
 

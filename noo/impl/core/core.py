@@ -37,12 +37,12 @@ class NooCore:
         runner = Runner(self, dest, spec.steps, variables, self.shell)
         runner.run()
 
-    def mod(self, noofile: str, dest: Path) -> None:
+    def mod(self, noofile: str, dest: Path, default_variables: dict[str, dict[str, str | int]] | None = None) -> None:
         spec = self.resolver.resolve(noofile)
 
         echo(f"Starting modification for {spec.name or 'unnamed'}.")
 
-        variables = get_variables()
+        variables = default_variables or get_variables()
         variables["var"].update(read_variables(spec.read))
 
         runner = Runner(self, dest, spec.steps, variables, self.shell)
