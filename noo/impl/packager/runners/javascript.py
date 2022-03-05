@@ -21,7 +21,7 @@ class JavaScriptRunner:
             remote=remote,
         )
 
-        poetry_step = Step(name="Update package.json")
+        package_json_step = Step(name="Update package.json")
 
         actions = [
             ReplaceAction(
@@ -44,8 +44,8 @@ class JavaScriptRunner:
             ),
         ]
 
-        poetry_step.actions.extend(actions)
-        noofile.steps.append(poetry_step)
+        package_json_step.actions.extend(actions)
+        noofile.steps.append(package_json_step)
 
         noofile.read = [
             ReadVariable(
