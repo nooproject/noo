@@ -14,7 +14,7 @@ class Registry(Storage):
             absolute_ref = "file:" + str(ref.absolute())
         else:
             absolute_ref = ref
-        
+
         super().__setitem__(key, absolute_ref)
 
     def __getitem__(self, key: str) -> str | Path:
