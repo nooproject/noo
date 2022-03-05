@@ -52,4 +52,3 @@ steps:
     actions:
       - action: command
         command: poetry install
-        cwd: ./$$noo:name
