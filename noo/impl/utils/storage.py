@@ -12,7 +12,7 @@ class Storage:
 
         self.path = config_path / (storage_name + ".json")
 
-        self._value: dict[str, Any] | None = {}
+        self._value: dict[str, Any] | None = None
 
     def _read(self, cache: bool = False) -> dict[str, Any]:
         if not self.path.exists():
