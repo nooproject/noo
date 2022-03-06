@@ -1,6 +1,6 @@
 from typing import Literal, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from .actions import ActionType, List
 
@@ -19,15 +19,15 @@ class Condition(BaseModel):
 
 class Step(BaseModel):
     name: str
-    actions: List[ActionType] = []
+    actions: List[ActionType] = Field(default_factory=list)
     conditions: Optional[List[Condition]] = None
 
 
 class BaseNoofile(BaseModel):
     noo_version: int
     name: str
-    read: List[ReadVariable] = []
-    steps: List[Step] = []
+    read: List[ReadVariable] = Field(default_factory=list)
+    steps: List[Step] = Field(default_factory=list)
 
 
 class Noofile(BaseNoofile):

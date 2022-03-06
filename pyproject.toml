@@ -23,6 +23,12 @@ taskipy = "^1.10.1"
 black = "^22.1.0"
 isort = "^5.10.1"
 pre-commit = "^2.17.0"
+markdown-link-attr-modifier = "^0.2.0"
+mkdocs-material = "^8.2.4"
+mkdocs-macros-plugin = "^0.6.4"
+mkdocs-material-extensions = "^1.0.3"
+mkdocs-git-revision-date-localized-plugin = "^1.0.0"
+mkdocs = "^1.2.3"
 
 [tool.poetry.scripts]
 noo = "noo:app"
@@ -30,6 +36,8 @@ noo = "noo:app"
 [tool.taskipy.tasks]
 lint = "black . && isort --profile black ."
 pre-commit = "pre-commit install --hook-type commit-msg"
+build-docs = "mkdocs build"
+serve-docs = "mkdocs serve --dev-addr=127.0.0.1:5000"
 
 [tool.black]
 line-length = 120

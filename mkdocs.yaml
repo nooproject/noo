@@ -1,0 +1,65 @@
+site_name: Noo
+site_description: Easily create new projects from template repositories.
+site_url: https://nooproject.dev
+
+repo_name: py-noo/noo
+repo_url: https://github.com/py-noo/noo
+
+copyright: Copyright (c) 2022 vcokltfre, MIT License.
+
+theme:
+  name: material
+
+  logo: assets/noo.png
+  favicon: assets/noo.png
+
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: light
+      toggle:
+        icon: material/weather-sunny
+        name: Light Mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: dark
+      toggle:
+        icon: material/weather-night
+        name: Dark Mode
+
+extra_css:
+    - styles/light.css
+    - styles/dark.css
+    - styles/common.css
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets
+  - pymdownx.details
+
+  - markdown_link_attr_modifier:
+      new_tab: external_only
+
+  - tables
+  - admonition
+  - attr_list
+
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+  - toc:
+      permalink: True
+
+plugins:
+  - search
+  - macros
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/py-noo/noo
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/zbMBkC3849
