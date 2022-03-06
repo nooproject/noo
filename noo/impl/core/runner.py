@@ -15,6 +15,7 @@ from ..models import (
     ReplaceAction,
     Step,
 )
+from ..utils import RunnerError
 from .formatter import format_vars, replace
 
 if TYPE_CHECKING:
@@ -35,12 +36,14 @@ class Runner:
         self,
         core: NooCore,
         base: Path,
+        name: str,
         steps: list[Step],
         variables: dict[str, dict[str, str | int]],
         allow_shell: bool = False,
     ) -> None:
         self.core = core
         self.base = base
+        self.name = name
         self.steps = steps
         self.vars = variables
         self.shell = allow_shell
@@ -49,16 +52,19 @@ class Runner:
         ns, name = var.removeprefix("$$").split(":", 1)
 
         if ns not in ("noo", "var"):
-            raise ValueError(f"Unknown namespace: {ns}")
+            raise RunnerError(f"Unknown variable namespace: {ns} (during string formatting, noofile: {self.name})")
 
         if name not in self.vars[ns]:
-            raise ValueError(f"Unknown variable: {ns}:{name}")
+            raise RunnerError(f"Unknown variable: {ns}:{name} (during string formatting, noofile: {self.name})")
 
         return self.vars[ns][name]
 
     def _run_replace(self, files: list[str], src: str, dest: str) -> None:
         for file in files:
             path = self.base / file
+
+            if not path.exists():
+                raise RunnerError(f"No such file: {path} (in replace action, noofile: {self.name})")
 
             source = path.read_text()
             target = replace(source, src, dest, self.vars)
@@ -73,13 +79,14 @@ class Runner:
 
     def _run_create(self, file: str, content: str) -> None:
         path = self.base / file
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(format_vars(content, self.vars))
 
     def _run_rename(self, file: str, dest: str) -> None:
         path = self.base / file
 
         if not path.exists():
-            raise ValueError(f"No such file: {path}")
+            raise RunnerError(f"No such file: {path} (in rename action, noofile {self.name})")
 
         path.rename(self.base / dest)
 
@@ -101,7 +108,9 @@ class Runner:
     def _run_command(self, command: str, fail: bool, cwd: str | Path) -> None:
         if not self.shell:
             if fail:
-                raise ValueError(f"Command `{command}` is required but shell commands are not allowed. If you wish to run this command please use --shell.")
+                raise RunnerError(
+                    f"Command `{command}` is required but shell commands are not allowed. If you wish to run this command please use --shell."
+                )
 
             echo(
                 f"Skipping command as shell is disabled. If you wish to run this command please use --shell.\n  Command: {command}"
@@ -114,7 +123,7 @@ class Runner:
         out, err = proc.communicate()
 
         if fail and proc.returncode:
-            raise RuntimeError(f"Command failed: {command}\n{err.decode()}")
+            raise RunnerError(f"Command failed: {command}\n{err.decode()}")
 
         echo(out.decode())
 
@@ -137,7 +146,7 @@ class Runner:
             elif isinstance(action, RemoteAction):
                 self.core.mod(action.remote, self.base, self.vars)
             else:
-                raise ValueError(f"Invalid action: {action}")
+                raise RunnerError(f"Invalid action: {action} (noofile: {self.name})")
 
     def run(self) -> None:
         for step in self.steps:
