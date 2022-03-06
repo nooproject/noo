@@ -23,7 +23,8 @@ See [contributing](./.github/CONTRIBUTING.md).
 ## Usage
 
 ```sh
-noo clone <name> <ref>
+noo clone <name> <ref> - Clone a new project.
+noo more <ref> - Modify the current project with a noofile.
 ```
 
 ## Noofile Specification
