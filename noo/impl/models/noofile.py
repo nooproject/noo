@@ -9,6 +9,7 @@ class ReadVariable(BaseModel):
     name: str
     prompt: Optional[str] = None
     default: Optional[str] = None
+    required: bool = True
 
 
 class Condition(BaseModel):

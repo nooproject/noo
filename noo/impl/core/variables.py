@@ -37,6 +37,9 @@ def read_variables(variables: list[ReadVariable]) -> dict[str, str | int]:
 
         value = input((variable.prompt or f"Enter {variable.name}") + f"{extra}: ")
 
+        if value == "" and variable.default is None and variable.required:
+            raise ValueError(f"{variable.name} is required.")
+
         data[variable.name] = value if value else variable.default
 
     return data

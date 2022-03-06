@@ -47,11 +47,12 @@ The following is a list of built in variables. They can be accessed by using `$$
 
 ### Read Object
 
-| Field   | Type | Description                                      |
-|---------|------|--------------------------------------------------|
-| name    | str  | The name of the variable to read.                |
-| prompt  | str  | The prompt to display when reading the variable. |
-| default | ?str | An optional default value.                       |
+| Field    | Type               | Description                                      |
+|----------|--------------------|--------------------------------------------------|
+| name     | str                | The name of the variable to read.                |
+| prompt   | str                | The prompt to display when reading the variable. |
+| default  | ?str               | An optional default value.                       |
+| required | bool; default=true | Whether this varable must be a non-empty string. |
 
 ### Step Object
 
