@@ -12,6 +12,7 @@ ALLOWED_KEYS = {"shell"}
 def set(key: str, value: str) -> None:
     if key not in ALLOWED_KEYS:
         echo(f"Invalid key: {key}")
+        return
 
     if key == "shell":
         if value not in {"allow", "deny"}:
