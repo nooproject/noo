@@ -100,6 +100,9 @@ class Runner:
 
     def _run_command(self, command: str, fail: bool, cwd: str | Path) -> None:
         if not self.shell:
+            if fail:
+                raise ValueError(f"Command `{command}` is required but shell commands are not allowed. If you wish to run this command please use --shell.")
+
             echo(
                 f"Skipping command as shell is disabled. If you wish to run this command please use --shell.\n  Command: {command}"
             )
