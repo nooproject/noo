@@ -31,7 +31,7 @@ class Store:
         self._file.write_text(dumps(self._data, indent=2))
 
     def get(self, key: str, default: Any | None = None) -> Any | None:
-        return self._data.get(key)
+        return self._data.get(key, default)
 
     def set(self, key: str, value: Any) -> None:
         self._data[key] = value
@@ -51,6 +51,35 @@ class Store:
     def __delitem__(self, key: str) -> None:
         del self._data[key]
         self._write()
+
+
+class FileStore:
+    def __init__(self, path: str) -> None:
+        self._path = CONFIG_BASE / path
+
+        if not self._path.exists():
+            self._path.mkdir(parents=True)
+
+    def exists(self, file: str) -> bool:
+        return (self._path / file).exists()
+
+    def write(self, file: str, value: str | bytes) -> None:
+        if isinstance(value, str):
+            (self._path / file).write_text(value)
+        else:
+            (self._path / file).write_bytes(value)
+
+    def read_text(self, file: str) -> str:
+        return (self._path / file).read_text()
+
+    def read_bytes(self, file: str) -> bytes:
+        return (self._path / file).read_bytes()
+
+    def absolute(self, file: str) -> str:
+        return str((self._path / file).absolute())
+
+    def delete(self, file: str) -> None:
+        (self._path / file).unlink()
 
 
 STORE = Store("config.json")

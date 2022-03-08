@@ -1,5 +1,6 @@
 from pathlib import Path
 from shutil import rmtree
+from typing import Optional
 
 from typer import Typer, echo
 
@@ -16,12 +17,15 @@ app.add_typer(config_app, name="conf")
 
 
 @app.command("clone")
-def clone(name: str, ref: str, dest: str = ".", shell: bool = False) -> None:
+def clone(name: str, ref: str, dest: str = ".", shell: bool = False, index: Optional[str] = None) -> None:
     path = Path(dest) / name
 
     if path.exists():
         echo(f"Path {path} already exists.")
         return
+
+    if index:
+        reg.set_index(index)
 
     noofile = reg.get(ref)
 
@@ -38,12 +42,15 @@ def clone(name: str, ref: str, dest: str = ".", shell: bool = False) -> None:
 
 
 @app.command("mod")
-def mod(ref: str, dest: str = ".", shell: bool = False) -> None:
+def mod(ref: str, dest: str = ".", shell: bool = False, index: Optional[str] = None) -> None:
     path = Path(dest)
 
     if not path.exists():
         echo(f"Path {path} does not exist.")
         return
+
+    if index:
+        reg.set_index(index)
 
     noofile = reg.get(ref)
 

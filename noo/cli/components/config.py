@@ -5,7 +5,7 @@ from ...impl.utils import STORE
 app = Typer()
 
 
-ALLOWED_KEYS = {"shell"}
+ALLOWED_KEYS = {"shell", "index"}
 
 
 @app.command("set")
@@ -19,6 +19,8 @@ def set(key: str, value: str) -> None:
             echo(f"Invalid value: {value} (must be one of 'allow', 'deny')")
             return
 
+        STORE[key] = value
+    elif key == "index":
         STORE[key] = value
 
     echo(f"Set {key} to {value}")

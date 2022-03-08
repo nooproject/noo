@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from ..models import Noofile
+from .index import IndexResolver
 from .resolver import Resolver
 from .store import STORE
 
@@ -11,6 +12,7 @@ class Registry:
     def __init__(self) -> None:
         self._data: dict = STORE.get("registry") or {}
         self._resolver = Resolver()
+        self._index = IndexResolver(self._resolver)
 
     def _write(self) -> None:
         STORE["registry"] = self._data
@@ -43,6 +45,17 @@ class Registry:
             self._add_local(name, Path(ref))
 
     def get(self, name: str) -> Noofile:
+        if name.startswith("@"):
+            name = name[1:]
+
+            author, pkg = name.split("/")
+            pkg_data = pkg.split(":")
+
+            if len(pkg_data) == 1:
+                pkg_data.append("latest")
+
+            return self._index.fetch(author, *pkg_data)
+
         if item := self._data.get(name):
             return self._resolve(item["ref"], item["type"] == "remote")
 
@@ -65,3 +78,6 @@ class Registry:
 
     def all(self) -> dict[str, dict[str, str]]:
         return self._data
+
+    def set_index(self, index: str) -> None:
+        self._index = IndexResolver(self._resolver, index)
