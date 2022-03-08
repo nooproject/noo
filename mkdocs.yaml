@@ -2,8 +2,8 @@ site_name: Noo
 site_description: Easily create new projects from template repositories.
 site_url: https://nooproject.dev
 
-repo_name: py-noo/noo
-repo_url: https://github.com/py-noo/noo
+repo_name: nooproject/noo
+repo_url: https://github.com/nooproject/noo
 
 copyright: Copyright (c) 2022 vcokltfre, MIT License.
 
@@ -60,6 +60,6 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/py-noo/noo
+      link: https://github.com/nooproject/noo
     - icon: fontawesome/brands/discord
       link: https://discord.gg/zbMBkC3849
