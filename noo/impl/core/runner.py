@@ -49,7 +49,10 @@ class Runner:
         self.shell = allow_shell
 
     def _resolve_var(self, var: str) -> str | int:
-        ns, name = var.removeprefix("$$").split(":", 1)
+        if var.startswith("$$"):
+            var = var[2:]
+
+        ns, name = var.split(":", 1)
 
         if ns not in ("noo", "var"):
             raise RunnerError(f"Unknown variable namespace: {ns} (during string formatting, noofile: {self.name})")
