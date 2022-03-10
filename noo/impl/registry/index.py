@@ -7,7 +7,7 @@ from typing import Any, Literal, Optional, TypedDict
 from requests import Session
 from yaml import safe_load
 
-from ..utils import FileStore, cancel
+from ..utils import FileStore, cancel, echo
 
 StaticIndexData = dict[str, dict[str, dict[str, str]]]
 
@@ -140,11 +140,13 @@ def fetch_index(url: str, empty: bool = False) -> Index | StaticIndex:
         res = session.get(url)
     except Exception:
         if empty:
+            echo(f"No index found at {url} but continuing with an empty index.")
             return StaticIndex(session, url, {})
         cancel("index", f"Could not fetch index {url}.")
 
     if res.status_code != 200:
         if empty:
+            echo(f"No index found at {url} but continuing with an empty index.")
             return StaticIndex(session, url, {})
         cancel("index", f"Index {url} not found.")
 
@@ -152,6 +154,7 @@ def fetch_index(url: str, empty: bool = False) -> Index | StaticIndex:
         data: GetIndexResponse = loads(res.text)
     except JSONDecodeError:
         if empty:
+            echo(f"No index found at {url} but continuing with an empty index.")
             return StaticIndex(session, url, {})
         cancel("index", f"Index {url} not valid.")
 
