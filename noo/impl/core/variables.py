@@ -5,9 +5,12 @@ from typing import Optional
 
 from ..models import ReadVariable
 
+Variables = dict[str, str | int]
+NSVariables = dict[str, Variables]
 
-def get_variables(name: Optional[str] = None) -> dict[str, dict[str, str | int]]:
-    data = {}
+
+def get_variables(name: Optional[str] = None) -> NSVariables:
+    data: NSVariables = {}
 
     now = datetime.now()
 
@@ -27,8 +30,8 @@ def get_variables(name: Optional[str] = None) -> dict[str, dict[str, str | int]]
     return data
 
 
-def read_variables(variables: list[ReadVariable]) -> dict[str, str | int]:
-    data = {}
+def read_variables(variables: list[ReadVariable]) -> Variables:
+    data: Variables = {}
 
     for variable in variables:
         extra = ""
@@ -40,6 +43,6 @@ def read_variables(variables: list[ReadVariable]) -> dict[str, str | int]:
         if value == "" and variable.default is None and variable.required:
             raise ValueError(f"{variable.name} is required.")
 
-        data[variable.name] = value if value else variable.default
+        data[variable.name] = value or variable.default or ""
 
     return data

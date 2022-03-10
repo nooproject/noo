@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 from typing import List, Optional
 
@@ -33,7 +35,7 @@ def generate(directory: str = ".", suffix: str = ".noofile.yml", remote: Optiona
         echo("No noofiles found.")
         return
 
-    commands = []
+    commands: list[str] = []
 
     branch = "master"
 

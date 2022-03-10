@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from subprocess import PIPE, Popen
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Callable
 
 from typer import echo
 
@@ -19,9 +19,9 @@ from ..utils import RunnerError
 from .formatter import format_vars, replace
 
 if TYPE_CHECKING:
-    from .core import NooCore
+    from .variables import NSVariables
 
-OPMAP = {
+OPMAP: dict[str, Callable[[int | str, int | str], bool]] = {
     "eq": lambda a, b: str(a) == str(b),
     "ne": lambda a, b: str(a) != str(b),
     "gt": lambda a, b: int(a) > int(b),
@@ -34,14 +34,14 @@ OPMAP = {
 class Runner:
     def __init__(
         self,
-        core: NooCore,
+        mod: Callable[[str, Path, NSVariables], None],
         base: Path,
         name: str,
         steps: list[Step],
         variables: dict[str, dict[str, str | int]],
         allow_shell: bool = False,
     ) -> None:
-        self.core = core
+        self.mod = mod
         self.base = base
         self.name = name
         self.steps = steps
@@ -147,7 +147,7 @@ class Runner:
             elif isinstance(action, CommandAction):
                 self._run_command(action.command, action.fail, action.cwd or self.base)
             elif isinstance(action, RemoteAction):
-                self.core.mod(action.remote, self.base, self.vars)
+                self.mod(action.remote, self.base, self.vars)
             else:
                 raise RunnerError(f"Invalid action: {action} (noofile: {self.name})")
 

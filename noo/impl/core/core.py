@@ -33,7 +33,7 @@ class NooCore:
         variables = get_variables(name)
         variables["var"].update(read_variables(spec.read))
 
-        runner = Runner(self, dest, spec.name, spec.steps, variables, self.shell)
+        runner = Runner(self.mod, dest, spec.name, spec.steps, variables, self.shell)
         runner.run()
 
     def mod(
@@ -54,5 +54,5 @@ class NooCore:
         variables = default_variables or get_variables()
         variables["var"].update(read_variables(spec.read))
 
-        runner = Runner(self, dest, spec.name, spec.steps, variables, self.shell)
+        runner = Runner(self.mod, dest, spec.name, spec.steps, variables, self.shell)
         runner.run()

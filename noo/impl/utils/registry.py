@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import TypedDict
 
 from ..models import Noofile
 from .index import IndexResolver
@@ -8,9 +9,14 @@ from .resolver import Resolver
 from .store import STORE
 
 
+class RegistryEntry(TypedDict):
+    type: str
+    ref: str
+
+
 class Registry:
     def __init__(self) -> None:
-        self._data: dict = STORE.get("registry") or {}
+        self._data: dict[str, RegistryEntry] = STORE.get("registry") or {}
         self._resolver = Resolver()
         self._index = IndexResolver(self._resolver)
 
@@ -76,7 +82,7 @@ class Registry:
 
         self._write()
 
-    def all(self) -> dict[str, dict[str, str]]:
+    def all(self) -> dict[str, RegistryEntry]:
         return self._data
 
     def set_index(self, index: str) -> None:

@@ -8,7 +8,7 @@ from typing import Any
 if _base := getenv("NOO_CONFIG_PATH"):
     CONFIG_BASE = Path(_base)
 else:
-    CONFIG_BASE = Path.home() / ".config" / "noo"
+    CONFIG_BASE = Path.home() / ".config" / "noo"  # type: ignore
 
 CONFIG_BASE.mkdir(parents=True, exist_ok=True)
 
@@ -23,7 +23,7 @@ class Store:
             self._data = loads(self._file.read_text())
         else:
             self._file.touch()
-            self._data = {}
+            self._data: dict[str, Any] = {}
 
             self._write()
 
