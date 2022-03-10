@@ -6,6 +6,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://nooproject.dev/indices/</loc>
+         <lastmod>2022-03-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://nooproject.dev/noofile/</loc>
          <lastmod>2022-03-10</lastmod>
          <changefreq>daily</changefreq>
