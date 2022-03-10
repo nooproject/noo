@@ -385,6 +385,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#copy-action" class="md-nav__link">
+    Copy action
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#command-action" class="md-nav__link">
     Command Action
   </a>
@@ -558,6 +565,13 @@
           <li class="md-nav__item">
   <a href="#rename-action" class="md-nav__link">
     Rename action
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-action" class="md-nav__link">
+    Copy action
   </a>
   
 </li>
@@ -844,7 +858,7 @@
 <td>The type of action, This is always "rename".</td>
 </tr>
 <tr>
-<td>files</td>
+<td>file</td>
 <td>str</td>
 <td>The file to rename.</td>
 </tr>
@@ -852,6 +866,34 @@
 <td>dest</td>
 <td>str</td>
 <td>The new filename. This is formatted with the defined variables.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="copy-action">Copy action<a class="headerlink" href="#copy-action" title="Permanent link">&para;</a></h4>
+<p>Copy actions are used to copy files.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>action</td>
+<td>literal[copy]</td>
+<td>The type of action, This is always "copy".</td>
+</tr>
+<tr>
+<td>file</td>
+<td>str</td>
+<td>The file to copy.</td>
+</tr>
+<tr>
+<td>dest</td>
+<td>str</td>
+<td>The destination filename. This is formatted with the defined variables.</td>
 </tr>
 </tbody>
 </table>
