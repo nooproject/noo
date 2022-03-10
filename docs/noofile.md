@@ -101,8 +101,18 @@ Rename actions are used to rename files.
 | Field  | Type            | Description                                                     |
 |--------|-----------------|-----------------------------------------------------------------|
 | action | literal[rename] | The type of action, This is always "rename".                    |
-| files  | str             | The file to rename.                                             |
+| file   | str             | The file to rename.                                             |
 | dest   | str             | The new filename. This is formatted with the defined variables. |
+
+#### Copy action
+
+Copy actions are used to copy files.
+
+| Field  | Type          | Description                                                             |
+|--------|---------------|-------------------------------------------------------------------------|
+| action | literal[copy] | The type of action, This is always "copy".                              |
+| file   | str           | The file to copy.                                                       |
+| dest   | str           | The destination filename. This is formatted with the defined variables. |
 
 #### Command Action
 

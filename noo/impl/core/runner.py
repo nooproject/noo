@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, Callable
 
 from ..models import (
     CommandAction,
+    CopyAction,
     CreateAction,
     DeleteAction,
     RemoteAction,
@@ -89,7 +90,15 @@ class Runner:
         if not path.exists():
             cancel(self.name, f"No such file: {path}")
 
-        path.rename(self.base / dest)
+        path.rename(self.base / format_vars(dest, self.vars))
+
+    def _run_copy(self, file: str, dest: str) -> None:
+        path = self.base / file
+
+        if not path.exists():
+            cancel(self.name, f"No such file: {path}")
+
+        (self.base / format_vars(dest, self.vars)).write_bytes(path.read_bytes())
 
     def _verify_step_conditions(self, step: Step) -> bool:
         if step.conditions is None:
@@ -143,6 +152,8 @@ class Runner:
                 self._run_create(action.file, action.content or "")
             elif isinstance(action, RenameAction):
                 self._run_rename(action.file, action.dest)
+            elif isinstance(action, CopyAction):
+                self._run_copy(action.file, action.dest)
             elif isinstance(action, CommandAction):
                 self._run_command(action.command, action.fail, action.cwd or self.base)
             elif isinstance(action, RemoteAction):

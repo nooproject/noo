@@ -31,6 +31,12 @@ class RenameAction(Action):
     dest: str
 
 
+class CopyAction(Action):
+    action: Literal["copy"]
+    file: str
+    dest: str
+
+
 class CommandAction(Action):
     action: Literal["command"]
     command: str
@@ -43,4 +49,13 @@ class RemoteAction(Action):
     remote: str
 
 
-ActionType = Union[ReplaceAction, DeleteAction, CreateAction, RenameAction, CommandAction, RemoteAction, Action]
+ActionType = Union[
+    ReplaceAction,
+    DeleteAction,
+    CreateAction,
+    RenameAction,
+    CopyAction,
+    CommandAction,
+    RemoteAction,
+    Action,
+]

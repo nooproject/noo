@@ -1,5 +1,6 @@
 from .actions import (
     CommandAction,
+    CopyAction,
     CreateAction,
     DeleteAction,
     RemoteAction,
@@ -12,6 +13,7 @@ __all__ = (
     "BaseNoofile",
     "CreateAction",
     "CommandAction",
+    "CopyAction",
     "DeleteAction",
     "Noofile",
     "ReadVariable",
