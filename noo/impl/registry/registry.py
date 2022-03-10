@@ -6,7 +6,7 @@ from typing import Any, Optional
 
 from ..models import BaseNoofile, Noofile
 from ..utils import STORE, cancel
-from .index import Index
+from .index import fetch_index
 from .local import fetch_local
 from .remote import RemoteResolver
 
@@ -19,7 +19,7 @@ INDEX_PACKAGE = re_compile(
 
 class Registry:
     def __init__(self) -> None:
-        self._index = Index("https://index.nooproject.dev/api/v1")
+        self._index = fetch_index(STORE.get("index") or "https://index.nooproject.dev/api/v1", empty=True)
         self._remote = RemoteResolver()
 
         self._data: dict[str, str] = STORE.get("registry") or {}
@@ -74,7 +74,7 @@ class Registry:
         return self._data
 
     def set_index(self, index: str) -> None:
-        self._index = Index(index)
+        self._index = fetch_index(index)
 
 
 REGISTRY = Registry()
