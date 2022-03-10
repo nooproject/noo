@@ -6,6 +6,7 @@ from typer import Typer, echo
 
 from ..impl.core import NooCore
 from ..impl.packager import Packager
+from ..impl.utils import NooException
 from .components import collection_app, config_app, registry_app
 from .components.registry import reg
 
@@ -36,6 +37,8 @@ def clone(name: str, ref: str, dest: str = ".", shell: bool = False, index: Opti
         core.clone(name, noofile, path)
 
         echo(f"Done!\n  cd {path}")
+    except NooException:
+        pass
     except Exception as e:
         echo(f"An error occurred while cloning: {e}")
         rmtree(path)

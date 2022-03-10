@@ -15,7 +15,7 @@ from ..models import (
     ReplaceAction,
     Step,
 )
-from ..utils import RunnerError
+from ..utils import cancel
 from .formatter import format_vars, replace
 
 if TYPE_CHECKING:
@@ -55,10 +55,10 @@ class Runner:
         ns, name = var.split(":", 1)
 
         if ns not in ("noo", "var"):
-            raise RunnerError(f"Unknown variable namespace: {ns} (during string formatting, noofile: {self.name})")
+            cancel(self.name, f"Invalid variable namespace: {ns}")
 
         if name not in self.vars[ns]:
-            raise RunnerError(f"Unknown variable: {ns}:{name} (during string formatting, noofile: {self.name})")
+            cancel(self.name, f"Unknown variable: {name}")
 
         return self.vars[ns][name]
 
@@ -67,7 +67,7 @@ class Runner:
             path = self.base / file
 
             if not path.exists():
-                raise RunnerError(f"No such file: {path} (in replace action, noofile: {self.name})")
+                cancel(self.name, f"No such file: {path}")
 
             source = path.read_text()
             target = replace(source, src, dest, self.vars)
@@ -89,7 +89,7 @@ class Runner:
         path = self.base / file
 
         if not path.exists():
-            raise RunnerError(f"No such file: {path} (in rename action, noofile {self.name})")
+            cancel(self.name, f"No such file: {path}")
 
         path.rename(self.base / dest)
 
@@ -111,8 +111,9 @@ class Runner:
     def _run_command(self, command: str, fail: bool, cwd: str | Path) -> None:
         if not self.shell:
             if fail:
-                raise RunnerError(
-                    f"Command `{command}` is required but shell commands are not allowed. If you wish to run this command please use --shell."
+                cancel(
+                    self.name,
+                    f"Command `{command}` is required but shell commands are not allowed. If you wish to run this command please use --shell.",
                 )
 
             echo(
@@ -126,7 +127,7 @@ class Runner:
         out, err = proc.communicate()
 
         if fail and proc.returncode:
-            raise RunnerError(f"Command failed: {command}\n{err.decode()}")
+            cancel(self.name, f"Command `{command}` failed with exit code {proc.returncode}:\n{err.decode()}")
 
         echo(out.decode())
 
@@ -149,7 +150,7 @@ class Runner:
             elif isinstance(action, RemoteAction):
                 self.mod(action.remote, self.base, self.vars)
             else:
-                raise RunnerError(f"Invalid action: {action} (noofile: {self.name})")
+                cancel(self.name, f"Unknown action type: {action}")
 
     def run(self) -> None:
         for step in self.steps:

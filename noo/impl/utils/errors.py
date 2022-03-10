@@ -1,20 +1,13 @@
-class NooError(Exception):
-    """Base class for all Noo errors."""
+from typing import NoReturn
 
+from typer import echo
+
+
+class NooException(Exception):
     pass
 
 
-class NoofileError(NooError):
-    def __init__(self, field: str, message: str) -> None:
-        self.field = field
-        self.message = message
+def cancel(scope: str, reason: str) -> NoReturn:
+    echo(f"[{scope}] {reason}")
 
-        super().__init__(f"Error in noofile field {field}: {message}")
-
-
-class ResolutionError(NooError):
-    pass
-
-
-class RunnerError(NooError):
-    pass
+    raise NooException(reason)
