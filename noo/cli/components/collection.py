@@ -5,7 +5,7 @@ from typing import List, Optional
 
 from typer import Typer
 
-from ...impl.utils import echo
+from ...impl.utils import cancel
 
 app = Typer()
 
@@ -15,12 +15,10 @@ def generate(directory: str = ".", suffix: str = ".noofile.yml", remote: Optiona
     path = Path(directory)
 
     if not path.exists():
-        echo("The specified directory does not exist.")
-        return
+        cancel("collection", "The specified directory does not exist.", exc=False)
 
     if not path.is_dir():
-        echo("The specified path is not a directory.")
-        return
+        cancel("collection", "The specified path is not a directory.", exc=False)
 
     files: List[Path] = []
 
@@ -34,8 +32,7 @@ def generate(directory: str = ".", suffix: str = ".noofile.yml", remote: Optiona
         files.append(file)
 
     if not files:
-        echo("No noofiles found.")
-        return
+        cancel("collection", "No noofiles found.", exc=False)
 
     commands: list[str] = []
 
