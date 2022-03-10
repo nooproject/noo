@@ -1,12 +1,11 @@
 from .echo import echo, set_quiet
 from .errors import NooException, cancel
-from .registry import Registry
 from .resolver import Resolver
-from .store import STORE, Store
+from .store import STORE, FileStore, Store
 
 __all__ = (
+    "FileStore",
     "NooException",
-    "Registry",
     "Resolver",
     "Store",
     "STORE",

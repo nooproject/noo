@@ -6,9 +6,9 @@ from typer import Typer
 
 from ..impl.core import NooCore
 from ..impl.packager import Packager
+from ..impl.registry import REGISTRY
 from ..impl.utils import NooException, cancel, echo, set_quiet
 from .components import collection_app, config_app, registry_app
-from .components.registry import reg
 
 app = Typer()
 
@@ -30,14 +30,14 @@ def clone(
         cancel("clone", f"Path {path} already exists.", exc=False)
 
     if index:
-        reg.set_index(index)
+        REGISTRY.set_index(index)
 
-    noofile = reg.get(ref)
+    noofile = REGISTRY.fetch_full(ref)
 
     echo(f"Cloning project {noofile.name} to {path}...")
 
     try:
-        core = NooCore(reg, shell)
+        core = NooCore(REGISTRY, shell)
         core.clone(name, noofile, path)
 
         echo(f"Done!\n  cd {path}")
@@ -59,13 +59,13 @@ def mod(ref: str, dest: str = ".", shell: bool = False, index: Optional[str] = N
         cancel("mod", f"Path {path} does not exist.", exc=False)
 
     if index:
-        reg.set_index(index)
+        REGISTRY.set_index(index)
 
-    noofile = reg.get(ref)
+    noofile = REGISTRY.fetch(ref)
 
     echo(f"Modifying project with {ref}...")
 
-    core = NooCore(reg, shell)
+    core = NooCore(REGISTRY, shell)
     core.mod(noofile, path)
 
     echo(f"Done!")

@@ -3,16 +3,15 @@ from pathlib import Path
 
 from typer import Typer
 
-from ...impl.utils import Registry, echo
+from ...impl.registry import REGISTRY
+from ...impl.utils import echo
 
 app = Typer()
-
-reg = Registry()
 
 
 @app.command("add")
 def add(name: str, ref: str) -> None:
-    reg.add(name, ref)
+    REGISTRY.add(name, ref)
 
     echo(f"Registered {name} as {ref}")
 
@@ -20,7 +19,7 @@ def add(name: str, ref: str) -> None:
 @app.command("remove")
 def remove(name: str) -> None:
     try:
-        reg.remove(name)
+        REGISTRY.remove(name)
     except KeyError:
         echo(f"No such key: {name}")
         return
@@ -33,14 +32,14 @@ def import_(file: str) -> None:
     data = loads(Path(file).read_text())
 
     for key, value in data.items():
-        reg.add(key, value["ref"])
+        REGISTRY.add(key, value["ref"])
 
     echo(f"Imported {len(data)} items")
 
 
 @app.command("export")
 def export(file: str = "export.json") -> None:
-    data = reg.all()
+    data = REGISTRY.all()
 
     Path(file).write_text(dumps(data, indent=2))
 

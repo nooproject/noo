@@ -3,8 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 
 from ..models import BaseNoofile, Noofile
+from ..registry import Registry
 from ..resolvers import clone_github, clone_local
-from ..utils import STORE, Registry, echo
+from ..utils import STORE, echo
 from .runner import Runner
 from .variables import get_variables, read_variables
 
@@ -42,7 +43,7 @@ class NooCore:
         in_action: bool = False,
     ) -> None:
         if isinstance(noofile, str):
-            spec = self.registry.get(noofile)
+            spec = self.registry.fetch(noofile)
         else:
             spec = noofile
 
