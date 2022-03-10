@@ -25,7 +25,7 @@ class Step(BaseModel):
 
 
 class BaseNoofile(BaseModel):
-    noo_version: int
+    noo_version: Literal[2]
     name: str
     read: List[ReadVariable] = Field(default_factory=list)
     steps: List[Step] = Field(default_factory=list)
