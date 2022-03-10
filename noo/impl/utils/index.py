@@ -3,9 +3,9 @@ from typing import Optional
 from urllib.parse import quote
 
 from requests import get
-from typer import echo
 
 from ..models import Noofile
+from .echo import echo
 from .resolver import Resolver
 from .store import STORE, FileStore
 

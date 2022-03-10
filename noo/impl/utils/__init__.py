@@ -1,3 +1,4 @@
+from .echo import echo, quiet
 from .errors import NooException, cancel
 from .registry import Registry
 from .resolver import Resolver
@@ -10,4 +11,6 @@ __all__ = (
     "Store",
     "STORE",
     "cancel",
+    "echo",
+    "quiet",
 )

@@ -3,7 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List, Optional
 
-from typer import Typer, echo
+from typer import Typer
+
+from ...impl.utils import echo
 
 app = Typer()
 

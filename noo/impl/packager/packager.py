@@ -3,9 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Type
 
-from typer import echo
 from yaml import safe_dump
 
+from ..utils import echo
 from .reader import read
 from .runners import AutoPackagerRunner, JavaScriptRunner, PythonPoetryRunner
 

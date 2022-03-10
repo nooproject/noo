@@ -4,8 +4,6 @@ from pathlib import Path
 from subprocess import PIPE, Popen
 from typing import TYPE_CHECKING, Callable
 
-from typer import echo
-
 from ..models import (
     CommandAction,
     CreateAction,
@@ -15,7 +13,7 @@ from ..models import (
     ReplaceAction,
     Step,
 )
-from ..utils import cancel
+from ..utils import cancel, echo
 from .formatter import format_vars, replace
 
 if TYPE_CHECKING:

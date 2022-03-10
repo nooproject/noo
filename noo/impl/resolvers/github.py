@@ -8,6 +8,8 @@ from zipfile import ZipFile
 
 from requests import get
 
+from ..utils import echo
+
 REPO = compile(r"(?P<author>[a-zA-Z0-9_-]+)\/(?P<repo>[a-zA-Z0-9_-]+)(@(?P<branch>[a-zA-Z0-9_-]+))?")
 
 
@@ -26,7 +28,7 @@ def clone_github(repo: str, dest: Path) -> None:
     temp_path.write_bytes(get(url).content)
 
     with ZipFile(temp_path) as zip_file:
-        print("Cloned to", dest.absolute())
+        echo(f"Cloned to {dest.absolute()}")
         zip_file.extractall(dest.parent)
 
     move(dest.parent / f"{match.group('repo')}-{match.group('branch') or 'master'}", dest)

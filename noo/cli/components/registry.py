@@ -1,9 +1,9 @@
 from json import dumps, loads
 from pathlib import Path
 
-from typer import Typer, echo
+from typer import Typer
 
-from ...impl.utils import Registry
+from ...impl.utils import Registry, echo
 
 app = Typer()
 

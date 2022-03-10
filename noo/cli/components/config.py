@@ -1,6 +1,6 @@
-from typer import Typer, echo
+from typer import Typer
 
-from ...impl.utils import STORE
+from ...impl.utils import STORE, echo
 
 app = Typer()
 

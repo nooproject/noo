@@ -2,11 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from typer import echo
-
 from ..models import BaseNoofile, Noofile
 from ..resolvers import clone_github, clone_local
-from ..utils import STORE, Registry
+from ..utils import STORE, Registry, echo
 from .runner import Runner
 from .variables import get_variables, read_variables
 

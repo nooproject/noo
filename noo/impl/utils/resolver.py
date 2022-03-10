@@ -3,10 +3,10 @@ from __future__ import annotations
 from pathlib import Path
 
 from requests import get
-from typer import echo
 from yaml import safe_load
 
 from ..models import Noofile
+from .echo import echo
 
 
 class Resolver:
