@@ -1,5 +1,9 @@
 Noo is a project templating tool designed to make creating new projects as easy and simple as possible. It is based on the [noofile](./noofile) specification.
 
+!!! warning
+
+    All content on this site currently refers to Noo version 2 which is in active development. These docs are not considered complete while this notice is here, any content within them may change at any time. The docs should be up-to-date with the master branch of the Noo repository.
+
 ## Installation
 
 From PyPI:
