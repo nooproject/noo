@@ -3,7 +3,7 @@ from typer import echo as _echo
 _quiet = False
 
 
-def quiet() -> None:
+def set_quiet() -> None:
     global _quiet
     _quiet = True
 
