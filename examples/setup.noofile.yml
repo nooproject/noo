@@ -1,0 +1,10 @@
+name: Setup Noo
+noo_version: 2
+
+steps:
+  - name: Setup Noo
+    actions:
+      - action: command
+        command: noo conf set shell allow
+      - action: command
+        command: noo reg add api examples/api.noofile.yml
