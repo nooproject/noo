@@ -25,7 +25,7 @@ def get_variables(name: Optional[str] = None) -> NSVariables:
     }
 
     if name:
-        data["noo"]["name"] = name  # type: ignore
+        data["noo"]["name"] = name
 
     return data
 
