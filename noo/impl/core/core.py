@@ -5,7 +5,7 @@ from pathlib import Path
 from ..models import BaseNoofile, Noofile
 from ..registry import Registry
 from ..resolvers import clone_github, clone_local
-from ..utils import STORE, echo
+from ..utils import STORE, cancel, echo
 from .runner import Runner
 from .variables import get_variables, read_variables
 
@@ -18,16 +18,12 @@ class NooCore:
     def clone(self, name: str, spec: Noofile, dest: Path) -> None:
         echo(f"Starting clone process for {spec.name}.")
 
-        if not spec.remote:
-            echo(f"No remote specified for {spec.name}")
-            return
-
         if spec.remote.startswith("git:"):
             clone_github(spec.remote[4:], dest)
         elif spec.remote.startswith("file:"):
             clone_local(Path(spec.remote[5:]), dest)
         else:
-            raise ValueError(f"Invalid remote: {spec.remote}")
+            cancel("core", f"Invalid remote: {spec.remote}")
 
         variables = get_variables(name)
         variables["var"].update(read_variables(spec.read))

@@ -33,7 +33,7 @@ OPMAP: dict[str, Callable[[int | str, int | str], bool]] = {
 class Runner:
     def __init__(
         self,
-        mod: Callable[[str, Path, NSVariables], None],
+        mod: Callable[[str, Path, NSVariables, bool], None],
         base: Path,
         name: str,
         steps: list[Step],
@@ -157,7 +157,7 @@ class Runner:
             elif isinstance(action, CommandAction):
                 self._run_command(action.command, action.fail, action.cwd or self.base)
             elif isinstance(action, RemoteAction):
-                self.mod(action.remote, self.base, self.vars)
+                self.mod(action.remote, self.base, self.vars, True)
             else:
                 cancel(self.name, f"Unknown action type: {action}")
 
