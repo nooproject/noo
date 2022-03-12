@@ -8,12 +8,11 @@ from ..impl.core import NooCore
 from ..impl.packager import Packager
 from ..impl.registry import REGISTRY
 from ..impl.utils import NooException, cancel, echo, set_quiet
-from .components import collection_app, config_app, registry_app
+from .components import config_app, registry_app
 
 app = Typer()
 
 app.add_typer(registry_app, name="reg")
-app.add_typer(collection_app, name="collection")
 app.add_typer(config_app, name="conf")
 
 
