@@ -10,7 +10,7 @@ Easily create new projects.
 pip install pynoo
 ```
 
-or install from github
+or install from GitHub
 
 ```sh
 pip install git+https://github.com/nooproject/noo
