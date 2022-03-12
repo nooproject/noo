@@ -2,7 +2,7 @@
 
 Easily create new projects.
 
-![Lint](https://github.com/py-noo/noo/actions/workflows/black.yml/badge.svg)
+![Lint](https://github.com/nooproject/noo/actions/workflows/black.yml/badge.svg)
 
 ## Installation
 
@@ -13,7 +13,7 @@ pip install pynoo
 or install from github
 
 ```sh
-pip install git+https://github.com/py-noo/noo
+pip install git+https://github.com/nooproject/noo
 ```
 
 ## Contributing
