@@ -1,4 +1,4 @@
-Noo is a project templating tool designed to make creating new projects as easy and simple as possible. It is based on the [noofile](./noofile) specification.
+Noo is a project templating tool designed to make creating new projects as easy and simple as possible. It is based on the [noofile](./noofile) specification. For further help please join our [Discord server](https://discord.gg/zbMBkC3849).
 
 !!! warning
 
@@ -24,4 +24,4 @@ The Noo source code can be found [here](https://github.com/py-noo/noo).
 
 ## Examples
 
-Example noofiles can be found [in the noo GitHub repository](https://github.com/py-noo/noo/tree/master/examples).
+Example noofiles can be found in [the noo GitHub repository](https://github.com/py-noo/noo/tree/master/examples).
