@@ -1,8 +1,12 @@
 from __future__ import annotations
 
 from pathlib import Path
+from random import choices
+from shutil import rmtree
+from string import ascii_letters
 
 from ..models import BaseNoofile, CommandAction, Noofile, RemoteAction
+from ..packager import Packager
 from ..registry import Registry
 from ..resolvers import clone_github, clone_local
 from ..utils import STORE, cancel, echo
@@ -53,6 +57,24 @@ class NooCore:
 
         runner = Runner(self.mod, dest, spec.name, spec.steps, variables, self.shell)
         runner.run()
+
+    def autoclone(self, name: str, repo: str, dest: Path) -> None:
+        echo(f"Starting autoclone process for {repo}.")
+
+        path = Path("/tmp/" + "".join(choices(ascii_letters, k=24)))
+        clone_github(repo, path)
+
+        packager = Packager(path)
+        noofile = packager.get_noofile(f"git:{repo}")
+
+        noofile_loc = path / "NOO_AUTOCLONE.noofile.yml"
+        packager.package(noofile_loc, f"git:{repo}")
+
+        self.check(str(noofile_loc.absolute()))
+
+        rmtree(path)
+
+        self.clone(name, noofile, dest)
 
     def mod(
         self,

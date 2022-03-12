@@ -48,6 +48,35 @@ def clone(
         rmtree(path)
 
 
+@app.command("autoclone")
+def autoclone(
+    name: str, repo: str, dest: str = ".", shell: bool = False, index: Optional[str] = None, quiet: bool = False
+) -> None:
+    if quiet:
+        set_quiet()
+
+    path = Path(dest) / name
+
+    if path.exists():
+        cancel("clone", f"Path {path} already exists.", exc=False)
+
+    if index:
+        REGISTRY.set_index(index)
+
+    echo(f"Cloning project {repo} to {path}...")
+
+    try:
+        core = NooCore(REGISTRY, shell)
+        core.autoclone(name, repo, path)
+
+        echo(f"Done!\n  cd {path}")
+    except NooException:
+        pass
+    except Exception as e:
+        echo(f"An error occurred while cloning: {e}")
+        rmtree(path)
+
+
 @app.command("mod")
 def mod(ref: str, dest: str = ".", shell: bool = False, index: Optional[str] = None, quiet: bool = False) -> None:
     if quiet:

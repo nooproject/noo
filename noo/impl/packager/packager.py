@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Type
+from typing import Optional, Type
 
 from yaml import safe_dump
 
+from ..models import Noofile
 from ..utils import echo
 from .reader import read
 from .runners import AutoPackagerRunner, JavaScriptRunner, PythonPoetryRunner
@@ -30,7 +31,10 @@ class Packager:
 
         self.runner = runner
 
-    def package(self, to: Path) -> None:
-        spec = self.runner.package(read("Remote slug: "))
+    def get_noofile(self, slug: str) -> Noofile:
+        return self.runner.package(slug)
+
+    def package(self, to: Path, slug: Optional[str] = None) -> None:
+        spec = self.runner.package(slug or read("Remote slug: "))
 
         to.write_text(safe_dump(spec.dict()))
