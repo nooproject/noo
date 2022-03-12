@@ -33,15 +33,17 @@ This field is the core of a noofile. It defines the steps to take to set up a ne
 
 The following is a list of built in variables. They can be accessed by using `$$noo:varname` in supported fields.
 
-| Name   | Description                                                  |
-|--------|--------------------------------------------------------------|
-| name   | The name of the noo project provided to the `clone` command. |
-| year   | The current year.                                            |
-| month  | The current month. (An integer starting from 1)              |
-| day    | The current day. (An integer starting from 1)                |
-| hour   | The current hour.                                            |
-| minute | The current minute.                                          |
-| second | The current second.                                          |
+| Name     | Description                                                  |
+|----------|--------------------------------------------------------------|
+| name     | The name of the noo project provided to the `clone` command. |
+| year     | The current year.                                            |
+| month    | The current month. (An integer starting from 1)              |
+| day      | The current day. (An integer starting from 1)                |
+| hour     | The current hour.                                            |
+| minute   | The current minute.                                          |
+| second   | The current second.                                          |
+| isotime  | The current ISO8601 timestamp.                               |
+| unixtime | The current Unix timestamp.                                  |
 
 ## Objects
 

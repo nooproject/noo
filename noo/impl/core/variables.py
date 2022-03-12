@@ -22,6 +22,8 @@ def get_variables(name: Optional[str] = None) -> NSVariables:
         "hour": now.hour,
         "minute": now.minute,
         "second": now.second,
+        "isotime": now.isoformat(),
+        "unixtime": round(now.timestamp()),
     }
 
     if name:
