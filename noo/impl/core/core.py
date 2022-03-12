@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from ..models import BaseNoofile, Noofile
+from ..models import BaseNoofile, CommandAction, Noofile, RemoteAction
 from ..registry import Registry
 from ..resolvers import clone_github, clone_local
 from ..utils import STORE, cancel, echo
@@ -14,6 +14,29 @@ class NooCore:
     def __init__(self, registry: Registry, allow_shell: bool = False) -> None:
         self.registry = registry
         self.shell = STORE.get("shell", "deny") == "allow" or allow_shell
+
+        self._noofiles: dict[str, BaseNoofile] = {}
+
+    def check(self, ref: str) -> list[BaseNoofile]:
+        noofiles: list[BaseNoofile] = []
+        noofile = self.registry.fetch(ref)
+
+        self._noofiles[ref] = noofile
+
+        noofiles.append(noofile)
+
+        for step in noofile.steps:
+            for action in step.actions:
+                if isinstance(action, RemoteAction):
+                    noofiles.extend(self.check(action.remote))
+                elif isinstance(action, CommandAction):
+                    if action.fail and not self.shell:
+                        cancel(
+                            "core",
+                            f"Noofile with ref {ref} has a command action that requires shell access, but shell is not enabled.",
+                        )
+
+        return noofiles
 
     def clone(self, name: str, spec: Noofile, dest: Path) -> None:
         echo(f"Starting clone process for {spec.name}.")

@@ -37,6 +37,7 @@ def clone(
 
     try:
         core = NooCore(REGISTRY, shell)
+        core.check(ref)
         core.clone(name, noofile, path)
 
         echo(f"Done!\n  cd {path}")
@@ -64,8 +65,12 @@ def mod(ref: str, dest: str = ".", shell: bool = False, index: Optional[str] = N
 
     echo(f"Modifying project with {ref}...")
 
-    core = NooCore(REGISTRY, shell)
-    core.mod(noofile, path)
+    try:
+        core = NooCore(REGISTRY, shell)
+        core.check(ref)
+        core.mod(noofile, path)
+    except NooException:
+        pass
 
     echo(f"Done!")
 

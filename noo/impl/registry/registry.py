@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from functools import lru_cache
 from pathlib import Path
 from re import compile as re_compile
 from typing import Any, Optional
@@ -51,9 +52,11 @@ class Registry:
     def _save(self) -> None:
         STORE["registry"] = self._data
 
+    @lru_cache(maxsize=None)
     def fetch(self, ref: str) -> BaseNoofile:
         return BaseNoofile(**self._fetch(ref))
 
+    @lru_cache(maxsize=None)
     def fetch_full(self, ref: str) -> Noofile:
         return Noofile(**self._fetch(ref))
 
