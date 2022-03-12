@@ -10,21 +10,21 @@
       
       
       
-        <link rel="canonical" href="https://nooproject.dev/">
+        <link rel="canonical" href="https://nooproject.dev/cli/">
       
-      <link rel="icon" href="assets/noo.png">
+      <link rel="icon" href="../assets/noo.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
     
     
       
-        <title>Noo</title>
+        <title>CLI - Noo</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.2d9f7617.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2d9f7617.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -39,13 +39,13 @@
       
     
     
-      <link rel="stylesheet" href="styles/light.css">
+      <link rel="stylesheet" href="../styles/light.css">
     
-      <link rel="stylesheet" href="styles/dark.css">
+      <link rel="stylesheet" href="../styles/dark.css">
     
-      <link rel="stylesheet" href="styles/common.css">
+      <link rel="stylesheet" href="../styles/common.css">
     
-    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#cli" class="md-skip">
           Skip to content
         </a>
       
@@ -87,9 +87,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Noo" class="md-header__button md-logo" aria-label="Noo" data-md-component="logo">
+    <a href=".." title="Noo" class="md-header__button md-logo" aria-label="Noo" data-md-component="logo">
       
-  <img src="assets/noo.png" alt="logo">
+  <img src="../assets/noo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -105,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              CLI
             
           </span>
         </div>
@@ -206,9 +206,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Noo" class="md-nav__button md-logo" aria-label="Noo" data-md-component="logo">
+    <a href=".." title="Noo" class="md-nav__button md-logo" aria-label="Noo" data-md-component="logo">
       
-  <img src="assets/noo.png" alt="logo">
+  <img src="../assets/noo.png" alt="logo">
 
     </a>
     Noo
@@ -234,6 +234,21 @@
 
   
   
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -242,14 +257,16 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Home
+          CLI
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="." class="md-nav__link md-nav__link--active">
-        Home
+      <a href="./" class="md-nav__link md-nav__link--active">
+        CLI
       </a>
       
         
@@ -257,6 +274,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -266,23 +285,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    Installation
+  <a href="#clone" class="md-nav__link">
+    clone
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#source" class="md-nav__link">
-    Source
+  <a href="#mod" class="md-nav__link">
+    mod
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    Examples
+  <a href="#reg" class="md-nav__link">
+    reg
   </a>
+  
+    <nav class="md-nav" aria-label="reg">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    add
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove" class="md-nav__link">
+    remove
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conf" class="md-nav__link">
+    conf
+  </a>
+  
+    <nav class="md-nav" aria-label="conf">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set" class="md-nav__link">
+    set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" class="md-nav__link">
+    reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-keys" class="md-nav__link">
+    Valid Keys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -302,22 +375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="cli/" class="md-nav__link">
-        CLI
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="indices/" class="md-nav__link">
+      <a href="../indices/" class="md-nav__link">
         File Indices
       </a>
     </li>
@@ -332,7 +390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="noofile/" class="md-nav__link">
+      <a href="../noofile/" class="md-nav__link">
         Noofiles
       </a>
     </li>
@@ -356,6 +414,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -364,23 +424,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    Installation
+  <a href="#clone" class="md-nav__link">
+    clone
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#source" class="md-nav__link">
-    Source
+  <a href="#mod" class="md-nav__link">
+    mod
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    Examples
+  <a href="#reg" class="md-nav__link">
+    reg
   </a>
+  
+    <nav class="md-nav" aria-label="reg">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    add
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove" class="md-nav__link">
+    remove
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conf" class="md-nav__link">
+    conf
+  </a>
+  
+    <nav class="md-nav" aria-label="conf">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set" class="md-nav__link">
+    set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" class="md-nav__link">
+    reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-keys" class="md-nav__link">
+    Valid Keys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -396,30 +510,191 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/nooproject/noo/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/nooproject/noo/edit/master/docs/cli.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
-  <h1>Home</h1>
-
-<p>Noo is a project templating tool designed to make creating new projects as easy and simple as possible. It is based on the <a href="./noofile">noofile</a> specification. For further help please join our <a href="https://discord.gg/zbMBkC3849" rel="noopener" target="_blank">Discord server</a>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>All content on this site currently refers to Noo version 2 which is in active development. These docs are not considered complete while this notice is here, any content within them may change at any time. The docs should be up-to-date with the master branch of the Noo repository.</p>
-</div>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<p>From PyPI:</p>
-<div class="highlight"><pre><span></span><code>pip install pynoo
+<h1 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h1>
+<p>The Noo CLI is how you interact with noo to perform operation such as cloning noofiles, modifying from noofiles, and setting config defaults.</p>
+<h2 id="clone"><code>clone</code><a class="headerlink" href="#clone" title="Permanent link">&para;</a></h2>
+<p>The clone command is used to clone a noofile from a noofile 'ref'.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>noo clone &lt;dest&gt; &lt;ref&gt; [--shell] [--quiet] [--index&lt;str&gt;]
 </code></pre></div>
-<p>From GitHub</p>
-<div class="highlight"><pre><span></span><code>pip install git+https://github.com/py-noo/noo
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dest</td>
+<td>The destination directory to clone the noofile to. This directory must not already exist.</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>The reference to the noofile to clone. This can be a local file, local registry entry, HTTP(S) URL, or <a href="../indices/">index identifier</a>.</td>
+</tr>
+<tr>
+<td>--shell</td>
+<td>Enable command actions for this clone.</td>
+</tr>
+<tr>
+<td>--quiet</td>
+<td>Only display required output, such as requests for input or errors.</td>
+</tr>
+<tr>
+<td>--index</td>
+<td>The noo file index to use for resolving index references.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mod"><code>mod</code><a class="headerlink" href="#mod" title="Permanent link">&para;</a></h2>
+<p>The mod command is used to in-place modify an existing project using a noofile.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>noo mod &lt;ref&gt; [dest=.] [--shell] [--quiet] [--index&lt;str&gt;]
 </code></pre></div>
-<h2 id="source">Source<a class="headerlink" href="#source" title="Permanent link">&para;</a></h2>
-<p>The Noo source code can be found <a href="https://github.com/py-noo/noo" rel="noopener" target="_blank">here</a>.</p>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<p>Example noofiles can be found in <a href="https://github.com/py-noo/noo/tree/master/examples" rel="noopener" target="_blank">the noo GitHub repository</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ref</td>
+<td>The reference to the noofile to modify with. This can be a local file, local registry entry, HTTP(S) URL, or <a href="../indices/">index identifier</a>.</td>
+</tr>
+<tr>
+<td>dest</td>
+<td>The destination directory to modify. Defaults to the current working directory.</td>
+</tr>
+<tr>
+<td>--shell</td>
+<td>Enable command actions for this modification.</td>
+</tr>
+<tr>
+<td>--quiet</td>
+<td>Only display required output, such as requests for input or errors.</td>
+</tr>
+<tr>
+<td>--index</td>
+<td>The noo file index to use for resolving index references.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="reg"><code>reg</code><a class="headerlink" href="#reg" title="Permanent link">&para;</a></h2>
+<p>The reg subcommand is used to modify local registry entries.</p>
+<h3 id="add"><code>add</code><a class="headerlink" href="#add" title="Permanent link">&para;</a></h3>
+<p>The add command is used to add a noofile to the local registry.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>noo reg add &lt;name&gt; &lt;ref&gt;
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>T</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>The reference to the noofile to register. This can be a local file, local registry entry, HTTP(S) URL, or <a href="../indices/">index identifier</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="remove"><code>remove</code><a class="headerlink" href="#remove" title="Permanent link">&para;</a></h3>
+<p>The remove command is used to remove a noofile from the local registry.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>noo reg remove &lt;name&gt;
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>The name of the registry entry to remove.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conf"><code>conf</code><a class="headerlink" href="#conf" title="Permanent link">&para;</a></h2>
+<p>The conf subcommand is used to modify the default Noo configuration.</p>
+<h3 id="set"><code>set</code><a class="headerlink" href="#set" title="Permanent link">&para;</a></h3>
+<p>The set command is used to set a default value for a configuration option.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>noo conf set &lt;key&gt; &lt;value&gt;
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>The config key to set.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>The value to set the key to.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reset"><code>reset</code><a class="headerlink" href="#reset" title="Permanent link">&para;</a></h3>
+<p>The reset command is used to reset a default value for a configuration option.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>noo conf reset &lt;key&gt;
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>The config key to reset.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="valid-keys">Valid Keys<a class="headerlink" href="#valid-keys" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shell</td>
+<td>Whether the shell is allowed by default in clone and mod operations. Allowed values: <code>allow</code>, <code>deny</code>.</td>
+</tr>
+<tr>
+<td>index</td>
+<td>The noo file index to use for resolving index references.</td>
+</tr>
+</tbody>
+</table>
 
               
             </article>
@@ -432,15 +707,30 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
       
         
-        <a href="cli/" class="md-footer__link md-footer__link--next" aria-label="Next: CLI" rel="next">
+        <a href="../indices/" class="md-footer__link md-footer__link--next" aria-label="Next: File Indices" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              CLI
+              File Indices
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -496,10 +786,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.467223ff.min.js"></script>
+      <script src="../assets/javascripts/bundle.467223ff.min.js"></script>
       
     
   </body>
