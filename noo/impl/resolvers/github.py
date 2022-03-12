@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from pathlib import Path
+from random import choices
 from re import compile
 from shutil import move
+from string import ascii_letters
 from tempfile import gettempdir
 from zipfile import ZipFile
 
@@ -27,8 +29,12 @@ def clone_github(repo: str, dest: Path) -> None:
     temp_path = Path(gettempdir()) / f"{hash(url)}.zip"
     temp_path.write_bytes(get(url).content)
 
+    extract_dir = Path("/tmp/" + "".join(choices(ascii_letters, k=24)))
+
     with ZipFile(temp_path) as zip_file:
         echo(f"Cloned to {dest.absolute()}")
-        zip_file.extractall(dest.parent)
+        zip_file.extractall(extract_dir)
 
-    move(dest.parent / f"{match.group('repo')}-{match.group('branch') or 'master'}", dest)
+    subdir = list(extract_dir.iterdir())[0]
+
+    move(subdir, dest)
