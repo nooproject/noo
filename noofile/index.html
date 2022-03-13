@@ -800,6 +800,7 @@
 </tbody>
 </table>
 <h3 id="action-objects">Action Objects<a class="headerlink" href="#action-objects" title="Permanent link">&para;</a></h3>
+<p>The <code>formatted</code> column of action descriptions below shows whether the field is formatted with the defined variables.</p>
 <h4 id="replace-action">Replace action<a class="headerlink" href="#replace-action" title="Permanent link">&para;</a></h4>
 <p>Replace actions are used to replace a specific string in a file.</p>
 <table>
@@ -808,6 +809,7 @@
 <th>Field</th>
 <th>Type</th>
 <th>Description</th>
+<th>Formatted</th>
 </tr>
 </thead>
 <tbody>
@@ -815,21 +817,25 @@
 <td>action</td>
 <td>literal[replace]</td>
 <td>The type of action, This is always "replace".</td>
+<td>-</td>
 </tr>
 <tr>
 <td>files</td>
 <td>list[str]</td>
 <td>The list of files to perform the replacement in.</td>
+<td>yes</td>
 </tr>
 <tr>
 <td>src</td>
 <td>str</td>
 <td>The source string to be replaced.</td>
+<td>no</td>
 </tr>
 <tr>
 <td>dest</td>
 <td>str</td>
-<td>The destination string. This is formatted with the defined variables.</td>
+<td>The destination string.</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -841,6 +847,7 @@
 <th>Field</th>
 <th>Type</th>
 <th>Description</th>
+<th>Formatted</th>
 </tr>
 </thead>
 <tbody>
@@ -848,11 +855,13 @@
 <td>action</td>
 <td>literal[delete]</td>
 <td>The type of action, This is always "delete".</td>
+<td>-</td>
 </tr>
 <tr>
 <td>files</td>
 <td>list[str]</td>
 <td>The list of files to delete.</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -864,6 +873,7 @@
 <th>Field</th>
 <th>Type</th>
 <th>Description</th>
+<th>Formatted</th>
 </tr>
 </thead>
 <tbody>
@@ -871,16 +881,19 @@
 <td>action</td>
 <td>literal[create]</td>
 <td>The type of action, This is always "create".</td>
+<td>-</td>
 </tr>
 <tr>
 <td>files</td>
 <td>str</td>
 <td>The filename to create.</td>
+<td>yes</td>
 </tr>
 <tr>
 <td>content</td>
 <td>?str</td>
-<td>The content of the file. This is formatted with the defined variables.</td>
+<td>The content of the file.</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -892,6 +905,7 @@
 <th>Field</th>
 <th>Type</th>
 <th>Description</th>
+<th>Formatted</th>
 </tr>
 </thead>
 <tbody>
@@ -899,16 +913,19 @@
 <td>action</td>
 <td>literal[rename]</td>
 <td>The type of action, This is always "rename".</td>
+<td>-</td>
 </tr>
 <tr>
 <td>file</td>
 <td>str</td>
 <td>The file to rename.</td>
+<td>Yes</td>
 </tr>
 <tr>
 <td>dest</td>
 <td>str</td>
-<td>The new filename. This is formatted with the defined variables.</td>
+<td>The new filename.</td>
+<td>Yes</td>
 </tr>
 </tbody>
 </table>
@@ -920,6 +937,7 @@
 <th>Field</th>
 <th>Type</th>
 <th>Description</th>
+<th>Formatted</th>
 </tr>
 </thead>
 <tbody>
@@ -927,16 +945,19 @@
 <td>action</td>
 <td>literal[copy]</td>
 <td>The type of action, This is always "copy".</td>
+<td>-</td>
 </tr>
 <tr>
 <td>file</td>
 <td>str</td>
 <td>The file to copy.</td>
+<td>Yes</td>
 </tr>
 <tr>
 <td>dest</td>
 <td>str</td>
 <td>The destination filename. This is formatted with the defined variables.</td>
+<td>Yes</td>
 </tr>
 </tbody>
 </table>
@@ -948,6 +969,7 @@
 <th>Field</th>
 <th>Type</th>
 <th>Description</th>
+<th>Formatted</th>
 </tr>
 </thead>
 <tbody>
@@ -955,21 +977,25 @@
 <td>action</td>
 <td>literal[command]</td>
 <td>The type of action, This is always "command".</td>
+<td>-</td>
 </tr>
 <tr>
 <td>command</td>
 <td>str</td>
-<td>The command to run. This is formatted with the defined variables.</td>
+<td>The command to run.</td>
+<td>yes</td>
 </tr>
 <tr>
 <td>fail</td>
 <td>bool; default=true</td>
 <td>Whether the whole process should fail if the command returns a non-zero exit code.</td>
+<td>-</td>
 </tr>
 <tr>
 <td>cwd</td>
 <td>str; default=.</td>
 <td>The working directory for the command. Defaults to the project directory for <code>clone</code> or the current directory for <code>mod</code>.</td>
+<td>no</td>
 </tr>
 </tbody>
 </table>
@@ -981,6 +1007,7 @@
 <th>Field</th>
 <th>Type</th>
 <th>Description</th>
+<th>Formatted</th>
 </tr>
 </thead>
 <tbody>
@@ -988,11 +1015,13 @@
 <td>action</td>
 <td>str</td>
 <td>The type of action, This is always "remote".</td>
+<td>-</td>
 </tr>
 <tr>
 <td>remote</td>
 <td>str</td>
 <td>The noofile to run. This supports the same refs as <code>noo clone</code> and <code>noo mod</code></td>
+<td>no</td>
 </tr>
 </tbody>
 </table>
