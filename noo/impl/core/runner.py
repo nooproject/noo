@@ -63,7 +63,7 @@ class Runner:
 
     def _run_replace(self, files: list[str], src: str, dest: str) -> None:
         for file in files:
-            path = self.base / file
+            path = self.base / format_vars(file, self.vars)
 
             if not path.exists():
                 cancel(self.name, f"No such file: {path}")
@@ -74,18 +74,18 @@ class Runner:
 
     def _run_delete(self, files: list[str]) -> None:
         for file in files:
-            path = self.base / file
+            path = self.base / format_vars(file, self.vars)
 
             if path.exists():
                 path.unlink()
 
     def _run_create(self, file: str, content: str) -> None:
-        path = self.base / file
+        path = self.base / format_vars(file, self.vars)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(format_vars(content, self.vars))
 
     def _run_rename(self, file: str, dest: str) -> None:
-        path = self.base / file
+        path = self.base / format_vars(file, self.vars)
 
         if not path.exists():
             cancel(self.name, f"No such file: {path}")
@@ -93,7 +93,7 @@ class Runner:
         path.rename(self.base / format_vars(dest, self.vars))
 
     def _run_copy(self, file: str, dest: str) -> None:
-        path = self.base / file
+        path = self.base / format_vars(file, self.vars)
 
         if not path.exists():
             cancel(self.name, f"No such file: {path}")
