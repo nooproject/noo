@@ -49,9 +49,6 @@ class PythonPoetryRunner:
             ),
         ]
 
-        poetry_step.actions.extend(actions)
-        noofile.steps.append(poetry_step)
-
         noofile.read = [
             ReadVariable(
                 name="author",
@@ -83,6 +80,9 @@ class PythonPoetryRunner:
                     prompt="Enter repository URL",
                 ),
             )
+
+        poetry_step.actions.extend(actions)
+        noofile.steps.append(poetry_step)
 
         return noofile
 
