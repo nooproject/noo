@@ -18,6 +18,22 @@ The clone command is used to clone a noofile from a noofile 'ref'.
 | --quiet   | Only display required output, such as requests for input or errors.                                                                    |
 | --index   | The noo file index to use for resolving index references.                                                                              |
 
+## `autoclone`
+
+The autoclone command is used to clone a GitHub repository using the autopackager to generate a noofile invisibly to the user.
+
+**Usage:**
+
+    noo autoclone <dest> <ref> [--shell] [--quiet] [--index<str>]
+
+| Parameter | Description                                                                               |
+|-----------|-------------------------------------------------------------------------------------------|
+| dest      | The destination directory to clone the noofile to. This directory must not already exist. |
+| ref       | The reference to the noofile to clone. This must be a GitHub ref: `author/repo[@branch]`  |
+| --shell   | Enable command actions for this clone.                                                    |
+| --quiet   | Only display required output, such as requests for input or errors.                       |
+| --index   | The noo file index to use for resolving index references.                                 |
+
 ## `mod`
 
 The mod command is used to in-place modify an existing project using a noofile.
