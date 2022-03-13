@@ -68,13 +68,14 @@ class NooCore:
         noofile = packager.get_noofile(f"git:{repo}")
 
         noofile_loc = path / "NOO_AUTOCLONE.noofile.yml"
-        packager.package(noofile_loc, f"git:{repo}")
+        packager.package(noofile_loc, f"file:{path.absolute()}")
 
         self.check(str(noofile_loc.absolute()))
 
-        rmtree(path)
-
-        self.clone(name, noofile, dest)
+        try:
+            self.clone(name, noofile, dest)
+        finally:
+            rmtree(path)
 
     def mod(
         self,
