@@ -67,75 +67,77 @@ The following is a list of built in variables. They can be accessed by using `$$
 
 ### Action Objects
 
+The `formatted` column of action descriptions below shows whether the field is formatted with the defined variables.
+
 #### Replace action
 
 Replace actions are used to replace a specific string in a file.
 
-| Field  | Type             | Description                                                           |
-|--------|------------------|-----------------------------------------------------------------------|
-| action | literal[replace] | The type of action, This is always "replace".                         |
-| files  | list[str]        | The list of files to perform the replacement in.                      |
-| src    | str              | The source string to be replaced.                                     |
-| dest   | str              | The destination string. This is formatted with the defined variables. |
+| Field  | Type             | Description                                      | Formatted |
+|--------|------------------|--------------------------------------------------|-----------|
+| action | literal[replace] | The type of action, This is always "replace".    | -         |
+| files  | list[str]        | The list of files to perform the replacement in. | yes       |
+| src    | str              | The source string to be replaced.                | no        |
+| dest   | str              | The destination string.                          | yes       |
 
 #### Delete action
 
 Delete actions are used to delete files.
 
-| Field  | Type            | Description                                  |
-|--------|-----------------|----------------------------------------------|
-| action | literal[delete] | The type of action, This is always "delete". |
-| files  | list[str]       | The list of files to delete.                 |
+| Field  | Type            | Description                                  | Formatted |
+|--------|-----------------|----------------------------------------------|-----------|
+| action | literal[delete] | The type of action, This is always "delete". | -         |
+| files  | list[str]       | The list of files to delete.                 | yes       |
 
 #### Create action
 
 Create actions are used to create files.
 
-| Field   | Type            | Description                                                            |
-|---------|-----------------|------------------------------------------------------------------------|
-| action  | literal[create] | The type of action, This is always "create".                           |
-| files   | str             | The filename to create.                                                |
-| content | ?str            | The content of the file. This is formatted with the defined variables. |
+| Field   | Type            | Description                                  | Formatted |
+|---------|-----------------|----------------------------------------------|-----------|
+| action  | literal[create] | The type of action, This is always "create". | -         |
+| files   | str             | The filename to create.                      | yes       |
+| content | ?str            | The content of the file.                     | yes       |
 
 #### Rename action
 
 Rename actions are used to rename files.
 
-| Field  | Type            | Description                                                     |
-|--------|-----------------|-----------------------------------------------------------------|
-| action | literal[rename] | The type of action, This is always "rename".                    |
-| file   | str             | The file to rename.                                             |
-| dest   | str             | The new filename. This is formatted with the defined variables. |
+| Field  | Type            | Description                                  | Formatted |
+|--------|-----------------|----------------------------------------------|-----------|
+| action | literal[rename] | The type of action, This is always "rename". | -         |
+| file   | str             | The file to rename.                          | Yes       |
+| dest   | str             | The new filename.                            | Yes       |
 
 #### Copy action
 
 Copy actions are used to copy files.
 
-| Field  | Type          | Description                                                             |
-|--------|---------------|-------------------------------------------------------------------------|
-| action | literal[copy] | The type of action, This is always "copy".                              |
-| file   | str           | The file to copy.                                                       |
-| dest   | str           | The destination filename. This is formatted with the defined variables. |
+| Field  | Type          | Description                                                             | Formatted |
+|--------|---------------|-------------------------------------------------------------------------|-----------|
+| action | literal[copy] | The type of action, This is always "copy".                              | -         |
+| file   | str           | The file to copy.                                                       | Yes       |
+| dest   | str           | The destination filename. This is formatted with the defined variables. | Yes       |
 
 #### Command Action
 
 Command actions are used to run shell commands. These commands are only run if `--shell` is explicitly specified by the user, or the user has set shell to allow by default using `noo conf set shell allow`.
 
-| Field   | Type               | Description                                                                                                              |
-|---------|--------------------|--------------------------------------------------------------------------------------------------------------------------|
-| action  | literal[command]   | The type of action, This is always "command".                                                                            |
-| command | str                | The command to run. This is formatted with the defined variables.                                                        |
-| fail    | bool; default=true | Whether the whole process should fail if the command returns a non-zero exit code.                                       |
-| cwd     | str; default=.     | The working directory for the command. Defaults to the project directory for `clone` or the current directory for `mod`. |
+| Field   | Type               | Description                                                                                                              | Formatted |
+|---------|--------------------|--------------------------------------------------------------------------------------------------------------------------|-----------|
+| action  | literal[command]   | The type of action, This is always "command".                                                                            | -         |
+| command | str                | The command to run.                                                                                                      | yes       |
+| fail    | bool; default=true | Whether the whole process should fail if the command returns a non-zero exit code.                                       | -         |
+| cwd     | str; default=.     | The working directory for the command. Defaults to the project directory for `clone` or the current directory for `mod`. | no        |
 
 #### Remote Action
 
 Remote actions are used to run additional modify noofiles in another noofile.
 
-| Field  | Type | Description                                                                  |
-|--------|------|------------------------------------------------------------------------------|
-| action | str  | The type of action, This is always "remote".                                 |
-| remote | str  | The noofile to run. This supports the same refs as `noo clone` and `noo mod` |
+| Field  | Type | Description                                                                  | Formatted |
+|--------|------|------------------------------------------------------------------------------|-----------|
+| action | str  | The type of action, This is always "remote".                                 | -         |
+| remote | str  | The noofile to run. This supports the same refs as `noo clone` and `noo mod` | no        |
 
 ### Condition Object
 
