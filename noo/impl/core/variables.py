@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from datetime import datetime
+from re import match
 from typing import Optional
 
 from ..models import ReadVariable
+from ..utils import cancel
 
 Variables = dict[str, str | int]
 NSVariables = dict[str, Variables]
@@ -45,6 +47,12 @@ def read_variables(variables: list[ReadVariable]) -> Variables:
         if value == "" and variable.default is None and variable.required:
             raise ValueError(f"{variable.name} is required.")
 
-        data[variable.name] = value or variable.default or ""
+        value = value or variable.default or ""
+
+        if variable.match is not None:
+            if not match(variable.match, value):
+                cancel("vars", f"{variable.name} does not match {variable.match}.")
+
+        data[variable.name] = value
 
     return data

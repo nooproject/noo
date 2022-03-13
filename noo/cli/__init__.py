@@ -42,7 +42,7 @@ def clone(
 
         echo(f"Done!\n  cd {path}")
     except NooException:
-        pass
+        rmtree(path)
     except Exception as e:
         echo(f"An error occurred while cloning: {e}")
         rmtree(path)
@@ -71,7 +71,7 @@ def autoclone(
 
         echo(f"Done!\n  cd {path}")
     except NooException:
-        pass
+        rmtree(path)
     except Exception as e:
         echo(f"An error occurred while cloning: {e}")
         rmtree(path)
