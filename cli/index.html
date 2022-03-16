@@ -292,6 +292,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#autoclone" class="md-nav__link">
+    autoclone
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mod" class="md-nav__link">
     mod
   </a>
@@ -431,6 +438,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#autoclone" class="md-nav__link">
+    autoclone
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mod" class="md-nav__link">
     mod
   </a>
@@ -538,6 +552,41 @@
 <tr>
 <td>ref</td>
 <td>The reference to the noofile to clone. This can be a local file, local registry entry, HTTP(S) URL, or <a href="../indices/">index identifier</a>.</td>
+</tr>
+<tr>
+<td>--shell</td>
+<td>Enable command actions for this clone.</td>
+</tr>
+<tr>
+<td>--quiet</td>
+<td>Only display required output, such as requests for input or errors.</td>
+</tr>
+<tr>
+<td>--index</td>
+<td>The noo file index to use for resolving index references.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="autoclone"><code>autoclone</code><a class="headerlink" href="#autoclone" title="Permanent link">&para;</a></h2>
+<p>The autoclone command is used to clone a GitHub repository using the autopackager to generate a noofile invisibly to the user.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>noo autoclone &lt;dest&gt; &lt;ref&gt; [--shell] [--quiet] [--index&lt;str&gt;]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dest</td>
+<td>The destination directory to clone the noofile to. This directory must not already exist.</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>The reference to the noofile to clone. This must be a GitHub ref: <code>author/repo[@branch]</code></td>
 </tr>
 <tr>
 <td>--shell</td>
