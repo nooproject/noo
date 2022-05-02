@@ -7,7 +7,7 @@ Easily create new projects.
 ## Installation
 
 ```sh
-pip install pynoo
+pip install noo
 ```
 
 or install from GitHub
