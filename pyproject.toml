@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "noo"
-version = "2.0.0a1"
+version = "2.0.0rc1"
 description = "Easily create new projects."
 authors = ["vcokltfre <vcokltfre@gmail.com>"]
 license = "MIT"
