@@ -12,7 +12,7 @@ This field is the name of the Noo template. It will be used when showing message
 
 This field is the remote location of the template repository. This can be in two different formats currently:
 
-- `git:` - This is the GitHub format. It can be used like this: `git:vcokltfre/api-template`
+- `git:` - This is the git format. It can be used like this: `git:https://github.com/vcokltfre/api-template.git`
 - `file:` - This is the local file format. It can be used like this: `file:~/templates/api-template`
 
 This field is required for cloning a noofile, but is **not** required when using `noo mod`.
