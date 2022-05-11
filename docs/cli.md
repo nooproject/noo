@@ -50,6 +50,14 @@ The mod command is used to in-place modify an existing project using a noofile.
 | --quiet   | Only display required output, such as requests for input or errors.                                                                          |
 | --index   | The noo file index to use for resolving index references.                                                                                    |
 
+## `autopackage`
+
+The autopackage command is used to generate a noofile from a project using the autopackager.
+
+**Usage:**
+
+    noo autopackage [--path<str>=.] [--dest<str>=./noofile.yml] [--quiet]
+
 ## `reg`
 
 The reg subcommand is used to modify local registry entries.
