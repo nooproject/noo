@@ -2,13 +2,15 @@ from __future__ import annotations
 
 from pathlib import Path
 from subprocess import PIPE, Popen
-from typing import TYPE_CHECKING, Callable
+from typing import TYPE_CHECKING, Callable, Optional
 
 from ..models import (
     CommandAction,
     CopyAction,
     CreateAction,
     DeleteAction,
+    FormatAction,
+    ReadAction,
     RemoteAction,
     RenameAction,
     ReplaceAction,
@@ -138,6 +140,38 @@ class Runner:
 
         echo(out.decode())
 
+    def _run_format(self, files: list[str]) -> None:
+        files = [format_vars(file, self.vars) for file in files]
+
+        for file in files:
+            path = self.base / file
+
+            if not path.exists():
+                cancel(self.name, f"No such file: {path}")
+
+            source = path.read_text()
+            target = format_vars(source, self.vars)
+
+            if source != target:
+                path.write_text(target)
+
+    def _run_read(self, name: str, prompt: Optional[str], default: Optional[str]) -> None:
+        if default is not None:
+            default = format_vars(default, self.vars)
+            default_prompt = f" [{default}]"
+        else:
+            default_prompt = ""
+
+        if prompt is None:
+            prompt = f"Enter {name}{default_prompt}: "
+
+        value = input(prompt)
+
+        if value == "" and default is None:
+            cancel(self.name, f"{name} is required")
+
+        self.vars["var"][format_vars(name, self.vars)] = value
+
     def _run_step(self, step: Step) -> None:
         if not self._verify_step_conditions(step):
             echo(f"Skipping step {step.name}.")
@@ -158,6 +192,10 @@ class Runner:
                 self._run_command(action.command, action.fail, action.cwd or self.base)
             elif isinstance(action, RemoteAction):
                 self.mod(action.remote, self.base, self.vars, True)
+            elif isinstance(action, FormatAction):
+                self._run_format(action.files)
+            elif isinstance(action, ReadAction):
+                self._run_read(action.name, action.prompt, action.default)
             else:
                 cancel(self.name, f"Unknown action type: {action}")
 

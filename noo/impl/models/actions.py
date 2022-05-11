@@ -49,6 +49,18 @@ class RemoteAction(Action):
     remote: str
 
 
+class FormatAction(Action):
+    action: Literal["format"]
+    files: list[str]
+
+
+class ReadAction(Action):
+    action: Literal["read"]
+    name: str
+    prompt: Optional[str] = None
+    default: Optional[str] = None
+
+
 ActionType = Union[
     ReplaceAction,
     DeleteAction,
@@ -57,5 +69,7 @@ ActionType = Union[
     CopyAction,
     CommandAction,
     RemoteAction,
+    FormatAction,
+    ReadAction,
     Action,
 ]
