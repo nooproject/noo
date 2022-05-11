@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "strict": true,
+  "title": "Noo",
+  "description": "Noo schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the noofile"
+    },
+    "noo_version": {
+      "type": "integer",
+      "description": "The noo version"
+    },
+    "remote": {
+      "type": "string",
+      "description": "The remote url",
+      "optional": true
+    },
+    "read": {
+      "type": "array",
+      "description": "The variables to read from the user",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the variable"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The prompt to ask the user"
+          },
+          "default": {
+            "type": "string",
+            "optional": true,
+            "description": "The default value"
+          },
+          "required": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether the variable is required"
+          },
+          "match": {
+            "type": "string",
+            "optional": true,
+            "description": "The regex to match the user input"
+          }
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "description": "The steps to execute",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the step"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "The action to execute",
+              "additionalProperties": true,
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": ["replace", "delete", "create", "rename", "copy", "command", "remote", "format", "read"]
+                }
+              }
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "op": {
+                  "type": "string",
+                  "enum": ["eq", "ne", "gt", "lt", "ge", "le"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
