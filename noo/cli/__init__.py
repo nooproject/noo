@@ -18,7 +18,12 @@ app.add_typer(config_app, name="conf")
 
 @app.command("clone")
 def clone(
-    name: str, ref: str, dest: str = ".", shell: bool = False, index: Optional[str] = None, quiet: bool = False
+    name: str,
+    ref: str,
+    dest: str = ".",
+    shell: bool = False,
+    index: Optional[str] = None,
+    quiet: bool = False,
 ) -> None:
     if quiet:
         set_quiet()
@@ -50,7 +55,12 @@ def clone(
 
 @app.command("autoclone")
 def autoclone(
-    name: str, repo: str, dest: str = ".", shell: bool = False, index: Optional[str] = None, quiet: bool = False
+    name: str,
+    repo: str,
+    dest: str = ".",
+    shell: bool = False,
+    index: Optional[str] = None,
+    quiet: bool = False,
 ) -> None:
     if quiet:
         set_quiet()
@@ -78,7 +88,13 @@ def autoclone(
 
 
 @app.command("mod")
-def mod(ref: str, dest: str = ".", shell: bool = False, index: Optional[str] = None, quiet: bool = False) -> None:
+def mod(
+    ref: str,
+    dest: str = ".",
+    shell: bool = False,
+    index: Optional[str] = None,
+    quiet: bool = False,
+) -> None:
     if quiet:
         set_quiet()
 
@@ -105,7 +121,11 @@ def mod(ref: str, dest: str = ".", shell: bool = False, index: Optional[str] = N
 
 
 @app.command("autopackage")
-def autopackage(path: str = ".", dest: str = "./noofile.yml", quiet: bool = False) -> None:
+def autopackage(
+    path: str = ".",
+    dest: str = "./noofile.yml",
+    quiet: bool = False,
+) -> None:
     if quiet:
         set_quiet()
 
